@@ -1,0 +1,3 @@
+include ':CHGAdapterKotlin'
+include ':app'
+rootProject.name = "CHGAdapter_Kotlin_Demo"
