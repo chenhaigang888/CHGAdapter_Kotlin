@@ -46,9 +46,13 @@ dependencies {
 
 publish {
     userOrg = 'chenhaigang888'
+    repoName = 'maven'
     groupId = 'com.chg.adapter'
     artifactId = 'CHGAdapter_Kotlin'
     publishVersion = '1.0.0'
+    version = '1.0.0'
+    licences = 'Apache-2.0'
     desc = '快速使用RecyclerView'
     website = 'https://github.com/chenhaigang888/CHGAdapter_Kotlin'
+    repository = 'https://github.com/chenhaigang888/CHGAdapter_Kotlin'
 }
