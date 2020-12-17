@@ -8,15 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * 封装的ViewHolder类
  */
-open class ViewHolder constructor(
-    itemView: View,
-    eventTransmissionListener: EventTransmissionListener?,
-    parent: ViewGroup?
-) : RecyclerView.ViewHolder(itemView) {
+open class ViewHolder<M:Model> constructor(itemView: View, eventTransmissionListener: EventTransmissionListener?, parent: ViewGroup?) : RecyclerView.ViewHolder(itemView),ViewHolderLifeCycle<M> {
 
     private var eventTransmissionListener: EventTransmissionListener? = null
     private var parent: ViewGroup? = null
-    private var model: Model? = null
+    private var model: M? = null
 
 
     init {
@@ -30,31 +26,6 @@ open class ViewHolder constructor(
                                callBack: EventTransmissionListener.CallBack?):Any?{
         return eventTransmissionListener?.onEventTransmissionListener(target,params,tag,callBack)
     }
-
-    /**
-     * 绑定数据
-     *
-     * @param model 具体的数据
-     */
-    open fun onBindViewHolder(model: Model?) {
-        this.model = model
-    }
-
-    /**
-     * 将要显示
-     */
-    open fun onViewAttachedToWindow() {}
-
-    /**
-     * 不在显示
-     */
-    open fun onViewDetachedFromWindow() {}
-
-
-    /**
-     * 即将销毁
-     */
-    open fun onViewRecycled() {}
 
     open fun <T : View?> findViewById(@IdRes id: Int): T? {
         return itemView.findViewById<T>(id)
@@ -78,15 +49,15 @@ open class ViewHolder constructor(
         return getAdapter()?.getCustomData()
     }
 
-    open fun getAdapter(): Adapter<Model>? {
-        return (getParent() as RecyclerView).adapter as Adapter<Model>?
+    open fun getAdapter(): Adapter<M>? {
+        return (getParent() as RecyclerView).adapter as Adapter<M>?
     }
 
-    open fun getModel(): Model? {
+    open fun getModel(): M? {
         return model
     }
 
-    open fun setModel(model: Model?) {
+    open fun setModel(model: M?) {
         this.model = model
     }
 
@@ -96,5 +67,21 @@ open class ViewHolder constructor(
 
     open fun setEventTransmissionListener(eventTransmissionListener: EventTransmissionListener?) {
         this.eventTransmissionListener = eventTransmissionListener
+    }
+
+    override fun onBindViewHolder(model: M?) {
+        this.model = model
+    }
+
+    override fun onViewAttachedToWindow() {
+
+    }
+
+    override fun onViewDetachedFromWindow() {
+
+    }
+
+    override fun onViewRecycled() {
+
     }
 }

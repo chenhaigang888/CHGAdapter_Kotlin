@@ -41,3 +41,4 @@ fun RecyclerView.adapter(): Adapter<Model> {
     }
     return adapter as Adapter<Model>
 }
+

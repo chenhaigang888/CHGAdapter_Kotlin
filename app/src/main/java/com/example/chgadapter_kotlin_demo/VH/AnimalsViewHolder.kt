@@ -15,18 +15,15 @@ class AnimalsViewHolder(
     itemView: View,
     eventTransmissionListener: EventTransmissionListener?,
     parent: ViewGroup?
-) : ViewHolder(itemView, eventTransmissionListener, parent) {
+) : ViewHolder<Animals>(itemView, eventTransmissionListener, parent) {
 
-    override fun onBindViewHolder(model: Model?) {
+    override fun onBindViewHolder(model: Animals?) {
         super.onBindViewHolder(model)
-
-        var animals:Animals = model as Animals
-
-        findViewById<TextView>(R.id.head)?.setText(animals.name)
+        findViewById<TextView>(R.id.head)?.setText(model?.name)
 
         findViewById<Button>(R.id.btn)?.setOnClickListener(object : OnClickListener{
             override fun onClick(v: View?) {
-                eventTransmission(this, model, 0, null)
+                eventTransmission(this, model, 0, null)//将点击事件传递到Activity中
             }
         })
 

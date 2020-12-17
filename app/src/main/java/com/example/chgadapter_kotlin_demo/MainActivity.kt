@@ -1,8 +1,10 @@
 package com.example.chgadapter_kotlin_demo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.chg.adapter.EventTransmissionListener
 import com.chg.adapter.eventTransmissionListener
 import com.chg.adapter.models
@@ -12,7 +14,7 @@ import com.example.chgadapter_kotlin_demo.model.Person
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView:RecyclerView
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +22,19 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.models = getAnimals()
 
-        recyclerView.eventTransmissionListener = object : EventTransmissionListener{
+        recyclerView.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                Log.i("chg", "滚动状态 newState：" + newState)
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                Log.i("chg", "滚动 dx：" + dx + "  dy:" + dy)
+            }
+        })
+
+        recyclerView.eventTransmissionListener = object : EventTransmissionListener {
             override fun onEventTransmissionListener(
                 target: Any?,
                 params: Any?,

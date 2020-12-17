@@ -1,13 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
-//apply plugin: 'org.jetbrains.dokka-android'
-
-//apply plugin: 'com.github.dcendents.android-maven'
-//apply plugin: 'com.jfrog.bintray'
-apply plugin: 'com.novoda.bintray-release'
-
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
 
@@ -44,15 +38,21 @@ dependencies {
 
 }
 
-publish {
-    userOrg = 'chenhaigang888'
-    repoName = 'maven'
-    groupId = 'com.chg.adapter'
-    artifactId = 'CHGAdapter_Kotlin'
-    publishVersion = '1.0.0'
-    version = '1.0.0'
-    licences = 'Apache-2.0'
-    desc = '快速使用RecyclerView'
-    website = 'https://github.com/chenhaigang888/CHGAdapter_Kotlin'
-    repository = 'https://github.com/chenhaigang888/CHGAdapter_Kotlin'
-}
+apply from: 'j-build.gradle'
+
+//
+//publish {
+//    userOrg = 'chenhaigang888'
+//    repoName = 'maven'
+//    groupId = 'com.chg.adapter'
+//    artifactId = 'CHGAdapter_Kotlin'
+//    publishVersion = '1.0.0'
+//    version = '1.0.0'
+//    licences = 'Apache-2.0'
+//    description = '快速使用RecyclerView'
+//    website = 'https://github.com/chenhaigang888/CHGAdapter_Kotlin'
+//    repository = 'https://github.com/chenhaigang888/CHGAdapter_Kotlin'
+//    bintrayUser = "chenhaigang888" // 账户名
+//    bintrayKey = 'fe95a9df8dff13570f2cd3febc0d44bf63a03761' // 就是API key
+//}
+

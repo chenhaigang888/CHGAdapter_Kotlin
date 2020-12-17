@@ -3,7 +3,7 @@ package com.chg.adapter
 /**
  * 事件传输
  */
-interface EventTransmissionListener {
+open interface EventTransmissionListener {
 
     /**
      * 统一的事件传输方法
@@ -14,7 +14,7 @@ interface EventTransmissionListener {
      * @param callBack 异步回调返回数据
      * @return 同步返回数据
      */
-    fun onEventTransmissionListener(
+    open fun onEventTransmissionListener(
         target: Any?,
         params: Any?,
         tag: Int,
@@ -27,7 +27,7 @@ interface EventTransmissionListener {
      * @param object 回调传递的内容
      * @return
      */
-    interface CallBack {
-        fun callBack(any: Any?): Any?
+    open interface CallBack {
+        open fun callBack(any: Any?): Any?
     }
 }

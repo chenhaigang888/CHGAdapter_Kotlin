@@ -15,7 +15,7 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
     private var eventTransmissionListener: EventTransmissionListener? = null
     private var customData: Any? = null
 
-    private var viewHolderClass: Class<ViewHolder>? = null
+    private var viewHolderClass: Class<ViewHolder<M>>? = null
     private var slideMomentumListener: SlideMomentumListener? = null
 
     constructor(context: Context, models: List<M>?) : this() {
@@ -79,21 +79,19 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         viewHolderClass =
-            models?.get(position)?.getHolderClass(position) as Class<ViewHolder>?
+            models?.get(position)?.getHolderClass(position) as Class<ViewHolder<M>>?
         return models?.get(position)?.getResource(position)!!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        var view = LayoutInflater.from(context).inflate(viewType, parent, false)
-        var constructor: Constructor<*> =
+        val view = LayoutInflater.from(context).inflate(viewType, parent, false)
+        val constructor: Constructor<*> =
             viewHolderClass?.getDeclaredConstructor(
                 View::class.java,
                 EventTransmissionListener::class.java,
                 ViewGroup::class.java
             )!!
-        var viewHolder: ViewHolder =
-            constructor.newInstance(view, eventTransmissionListener, parent) as ViewHolder
-        return viewHolder
+        return constructor.newInstance(view, eventTransmissionListener, parent) as ViewHolder<M>
     }
 
     override fun getItemCount(): Int {
@@ -104,10 +102,11 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
      * 绑定数据
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
         if (getSlideMomentumListener() != null && itemCount - position < getSlideMomentumListener()!!.onRemainingAmount()) {
             getSlideMomentumListener()!!.onArriveRemainingAmount()
         }
-        var viewHolder: ViewHolder = holder as ViewHolder
+        val viewHolder: ViewHolder<M> = holder as ViewHolder<M>
         viewHolder.onBindViewHolder(models?.get(position))
     }
 
@@ -119,7 +118,7 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
      */
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
-        (holder as ViewHolder).onViewAttachedToWindow()
+        (holder as ViewHolder<M>).onViewAttachedToWindow()
     }
 
     /**
@@ -129,11 +128,13 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
      */
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         super.onViewDetachedFromWindow(holder)
-        (holder as ViewHolder).onViewDetachedFromWindow()
+        (holder as ViewHolder<M>).onViewDetachedFromWindow()
     }
 
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         super.onViewRecycled(holder)
-        (holder as ViewHolder).onViewRecycled()
+        (holder as ViewHolder<M>).onViewRecycled()
     }
+
+
 }
