@@ -14,7 +14,6 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
     private var context: Context? = null
     private var eventTransmissionListener: EventTransmissionListener? = null
     private var customData: Any? = null
-
     private var viewHolderClass: Class<ViewHolder<M>>? = null
     private var slideMomentumListener: SlideMomentumListener? = null
 
@@ -26,7 +25,6 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
     constructor(context: Context) : this() {
         this.context = context
     }
-
 
     /**
      * 监听滑动的数量
@@ -102,7 +100,6 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
      * 绑定数据
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         if (getSlideMomentumListener() != null && itemCount - position < getSlideMomentumListener()!!.onRemainingAmount()) {
             getSlideMomentumListener()!!.onArriveRemainingAmount()
         }

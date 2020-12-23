@@ -2,7 +2,7 @@ package com.example.chgadapter_kotlin_demo.model
 
 import com.chg.adapter.Model
 import com.example.chgadapter_kotlin_demo.R
-import com.example.chgadapter_kotlin_demo.VH.AnimalsViewHolder
+import com.example.chgadapter_kotlin_demo.VH.Animals
 
 /**
  * 动物
@@ -20,6 +20,8 @@ open class Animals() : Model {
     }
 
     override fun getHolderClass(position: Int): Class<*> {
-        return AnimalsViewHolder::class.java
+        return Animals::class.java
     }
 }
+
+

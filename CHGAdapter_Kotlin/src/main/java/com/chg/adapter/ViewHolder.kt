@@ -8,29 +8,36 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * 封装的ViewHolder类
  */
-open class ViewHolder<M:Model> constructor(itemView: View, eventTransmissionListener: EventTransmissionListener?, parent: ViewGroup?) : RecyclerView.ViewHolder(itemView),ViewHolderLifeCycle<M> {
+open class ViewHolder<M : Model> constructor(
+    itemView: View,
+    eventTransmissionListener: EventTransmissionListener?,
+    parent: ViewGroup?
+) : RecyclerView.ViewHolder(itemView),ViewHolderLifeCycle<M> ,Notify{
 
     private var eventTransmissionListener: EventTransmissionListener? = null
     private var parent: ViewGroup? = null
     private var model: M? = null
-
 
     init {
         this.eventTransmissionListener = eventTransmissionListener
         this.parent = parent
     }
 
-    open fun eventTransmission(target: Any?,
-                               params: Any?,
-                               tag: Int,
-                               callBack: EventTransmissionListener.CallBack?):Any?{
-        return eventTransmissionListener?.onEventTransmissionListener(target,params,tag,callBack)
+    /**
+     * 快捷的方法
+     */
+    open fun eventTransmission(
+        target: Any?,
+        params: Any?,
+        tag: Int,
+        callBack: EventTransmissionListener.CallBack?
+    ):Any?{
+        return eventTransmissionListener?.onEventTransmissionListener(target, params, tag, callBack)
     }
 
     open fun <T : View?> findViewById(@IdRes id: Int): T? {
         return itemView.findViewById<T>(id)
     }
-
 
     open fun getParent(): ViewGroup {
         return parent!!
@@ -67,6 +74,64 @@ open class ViewHolder<M:Model> constructor(itemView: View, eventTransmissionList
 
     open fun setEventTransmissionListener(eventTransmissionListener: EventTransmissionListener?) {
         this.eventTransmissionListener = eventTransmissionListener
+    }
+
+    /**
+     * 刷新当前Item
+     */
+    override fun notifyCurrentItemChanged(){
+        notifyItemChanged(adapterPosition)
+    }
+
+    override fun notifyDataSetChanged() {
+        getAdapter()?.notifyDataSetChanged()
+    }
+
+
+    override fun notifyItemChanged(position: Int) {
+        getAdapter()?.notifyItemRangeChanged(position, 1)
+    }
+
+
+    override fun notifyItemChanged(position: Int, payload: Any?) {
+        getAdapter()?.notifyItemRangeChanged(position, 1, payload)
+    }
+
+
+    override fun notifyItemRangeChanged(positionStart: Int, itemCount: Int) {
+        getAdapter()?.notifyItemRangeChanged(positionStart, itemCount)
+    }
+
+
+    override fun notifyItemRangeChanged(
+        positionStart: Int, itemCount: Int,
+        payload: Any?
+    ) {
+        getAdapter()?.notifyItemRangeChanged(positionStart, itemCount, payload)
+    }
+
+
+    override fun notifyItemInserted(position: Int) {
+        getAdapter()?.notifyItemRangeInserted(position, 1)
+    }
+
+
+    override fun notifyItemMoved(fromPosition: Int, toPosition: Int) {
+        getAdapter()?.notifyItemMoved(fromPosition, toPosition)
+    }
+
+
+    override fun notifyItemRangeInserted(positionStart: Int, itemCount: Int) {
+        getAdapter()?.notifyItemRangeInserted(positionStart, itemCount)
+    }
+
+
+    override fun notifyItemRemoved(position: Int) {
+        getAdapter()?.notifyItemRangeRemoved(position, 1)
+    }
+
+    override fun notifyItemRangeRemoved(positionStart: Int, itemCount: Int) {
+        getAdapter()?.notifyItemRangeRemoved(positionStart, itemCount)
     }
 
     override fun onBindViewHolder(model: M?) {

@@ -11,7 +11,7 @@ import com.chg.adapter.ViewHolder
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.model.Animals
 
-class AnimalsViewHolder(
+class Animals(
     itemView: View,
     eventTransmissionListener: EventTransmissionListener?,
     parent: ViewGroup?
@@ -23,10 +23,8 @@ class AnimalsViewHolder(
 
         findViewById<Button>(R.id.btn)?.setOnClickListener(object : OnClickListener{
             override fun onClick(v: View?) {
-                eventTransmission(this, model, 0, null)//将点击事件传递到Activity中
+                notifyCurrentItemChanged()
             }
         })
-
     }
-
 }
