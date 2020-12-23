@@ -79,7 +79,7 @@ open class ViewHolder<M : Model> constructor(
     /**
      * 刷新当前Item
      */
-    override fun notifyCurrentItemChanged(){
+    open fun notifyCurrentItemChanged(){
         notifyItemChanged(adapterPosition)
     }
 

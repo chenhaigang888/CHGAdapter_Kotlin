@@ -11,7 +11,7 @@ import com.chg.adapter.ViewHolder
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.model.Animals
 
-class Animals(
+class AnimalsViewHolder(
     itemView: View,
     eventTransmissionListener: EventTransmissionListener?,
     parent: ViewGroup?
@@ -23,7 +23,7 @@ class Animals(
 
         findViewById<Button>(R.id.btn)?.setOnClickListener(object : OnClickListener{
             override fun onClick(v: View?) {
-                notifyCurrentItemChanged()
+                eventTransmission(this@AnimalsViewHolder, getModel(),1,null)
             }
         })
     }
