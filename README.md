@@ -8,3 +8,6 @@ CHGAdapter_Kotlin简单快速的使用RecyclerView而不需要写Adapter。此�
 - Ios: 
 - oc:https://github.com/chenhaigang888/CHGAdapter 
 - swift:https://github.com/chenhaigang888/CHGAdapter_swift
+
+- HarmonyOS
+- java:https://github.com/chenhaigang888/UltimateProvider
