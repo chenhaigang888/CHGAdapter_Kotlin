@@ -1,6 +1,7 @@
 package com.chg.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import java.lang.reflect.Constructor
 
-open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
+open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>(), View.OnClickListener,View.OnLongClickListener {
 
     private var models: List<M>? = null
     private var context: Context? = null
@@ -16,6 +17,11 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
     private var customData: Any? = null
     private var viewHolderClass: Class<ViewHolder<M>>? = null
     private var slideMomentumListener: SlideMomentumListener? = null
+
+    private var onItemClickListener : OnItemClickListener? = null
+    private var onItemLongClickListener :OnItemLongClickListener? = null
+
+    private var recyclerView : RecyclerView? = null
 
     constructor(context: Context, models: List<M>?) : this() {
         this.context = context
@@ -26,10 +32,18 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
         this.context = context
     }
 
+     interface OnItemClickListener {
+        fun onItemClick(parent: RecyclerView?, view: View?, position: Int, model: Model?)
+    }
+
+     interface OnItemLongClickListener {
+        fun onItemLongClick(parent: RecyclerView?, view: View?, position: Int, model: Model?): Boolean
+    }
+
     /**
      * 监听滑动的数量
      */
-    interface SlideMomentumListener {
+     interface SlideMomentumListener {
         /**
          * 设置剩余数量没展示的时候发出回调。当剩余的item数量小于设置的数量 onRemainingAmount方法回被回调
          *
@@ -49,6 +63,22 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
 
     open fun setSlideMomentumListener(slideMomentumListener: SlideMomentumListener?) {
         this.slideMomentumListener = slideMomentumListener
+    }
+
+    open fun getOnItemClickListener(): OnItemClickListener? {
+        return onItemClickListener
+    }
+
+    open fun setOnItemClickListener(onItemClickListener: OnItemClickListener?) {
+        this.onItemClickListener = onItemClickListener
+    }
+
+    open fun getOnItemLongClickListener(): OnItemLongClickListener? {
+        return onItemLongClickListener
+    }
+
+    open fun setOnItemLongClickListener(onItemLongClickListener: OnItemLongClickListener?) {
+        this.onItemLongClickListener = onItemLongClickListener
     }
 
     open fun getModels(): List<M>? {
@@ -75,21 +105,30 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
         this.eventTransmissionListener = eventTransmissionListener
     }
 
+    @SuppressWarnings("unchecked")
     override fun getItemViewType(position: Int): Int {
-        viewHolderClass =
-            models?.get(position)?.getHolderClass(position) as Class<ViewHolder<M>>?
+        viewHolderClass = models?.get(position)?.getHolderClass(position) as Class<ViewHolder<M>>?
         return models?.get(position)?.getResource(position)!!
     }
 
+    private fun initViewListener(view: View){
+        view.setOnClickListener(this)
+        view.setOnLongClickListener(this)
+    }
+
+    @SuppressWarnings("unchecked")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(context).inflate(viewType, parent, false)
+        initViewListener(view)
         val constructor: Constructor<*> =
             viewHolderClass?.getDeclaredConstructor(
                 View::class.java,
                 EventTransmissionListener::class.java,
                 ViewGroup::class.java
             )!!
-        return constructor.newInstance(view, eventTransmissionListener, parent) as ViewHolder<M>
+        val viewHolder = constructor.newInstance(view, eventTransmissionListener, parent) as ViewHolder<M>
+        viewHolder.onCreated();
+        return viewHolder
     }
 
     override fun getItemCount(): Int {
@@ -99,6 +138,7 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
     /**
      * 绑定数据
      */
+    @SuppressWarnings("unchecked")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (getSlideMomentumListener() != null && itemCount - position < getSlideMomentumListener()!!.onRemainingAmount()) {
             getSlideMomentumListener()!!.onArriveRemainingAmount()
@@ -113,6 +153,7 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
      *
      * @param holder
      */
+    @SuppressWarnings("unchecked")
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
         (holder as ViewHolder<M>).onViewAttachedToWindow()
@@ -123,15 +164,44 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>() {
      *
      * @param holder
      */
+    @SuppressWarnings("unchecked")
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         super.onViewDetachedFromWindow(holder)
         (holder as ViewHolder<M>).onViewDetachedFromWindow()
     }
 
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        this.recyclerView= recyclerView;
+    }
+
+    @SuppressWarnings("unchecked")
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         super.onViewRecycled(holder)
         (holder as ViewHolder<M>).onViewRecycled()
     }
 
 
+    override fun onClick(v: View?) {
+        if (onItemClickListener != null) {
+            val position: Int? = recyclerView?.getChildAdapterPosition(v!!)
+            position?.let {
+                onItemClickListener?.onItemClick(recyclerView,v,
+                    it,getModels()?.get(position))
+            }
+        }
+    }
+
+    override fun onLongClick(v: View?): Boolean {
+        if (onItemLongClickListener !== null) {
+            val position: Int? = recyclerView?.getChildAdapterPosition(v!!)
+            position?.let {
+                onItemLongClickListener?.onItemLongClick(recyclerView,v,
+                    it,getModels()?.get(position))
+            }
+        }
+        return true
+    }
 }
+
+

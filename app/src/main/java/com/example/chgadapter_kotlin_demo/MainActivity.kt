@@ -1,17 +1,15 @@
 package com.example.chgadapter_kotlin_demo
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.chg.adapter.EventTransmissionListener
-import com.chg.adapter.eventTransmissionListener
-import com.chg.adapter.models
-import com.example.chgadapter_kotlin_demo.VH.AnimalsViewHolder
-import com.example.chgadapter_kotlin_demo.model.Animals
+import com.chg.adapter.*
+import com.example.chgadapter_kotlin_demo.VH.SongViewHolder
+import com.example.chgadapter_kotlin_demo.model.MenuItemModel
 
-class MainActivity : AppCompatActivity(){
+open class MainActivity : AppCompatActivity(),EventTransmissionListener,Adapter.OnItemClickListener{
 
     private lateinit var recyclerView: RecyclerView
 
@@ -19,34 +17,43 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.models = getAnimals()
+        //设置数据
+        recyclerView.models = getModels()
+        //接收ItemView的中的事件
+        recyclerView.eventTransmissionListener = this
+        recyclerView.setOnItemClickListener(this)
 
-        //接收ItemView的按钮点击事件
-        recyclerView.eventTransmissionListener = (object :EventTransmissionListener{
-            override fun onEventTransmissionListener(
-                target: Any?,
-                params: Any?,
-                tag: Int,
-                callBack: EventTransmissionListener.CallBack?
-            ): Any? {
-                if (target is AnimalsViewHolder) {
-                    if (tag == 1) {
-                        Toast.makeText(this@MainActivity,"按钮事件传递到页面",Toast.LENGTH_LONG).show()
-                    }
-                }
-                return null
-            }
-        })
     }
 
-    fun getAnimals(): List<Animals> {
-        var models = mutableListOf<Animals>()
-        for (index in 1..1000) {
-            models.add(Animals("头:$index"))
-        }
+    open fun getModels(): List<Model> {
+        var models = mutableListOf<MenuItemModel>()
+        models.add(MenuItemModel("简单的显示（显示一种布局）","最基础使用",SongActivity::class.java))
+        models.add(MenuItemModel("简单的显示（显示多种布局）","最基础使用",RecommendActivity::class.java))
+        models.add(MenuItemModel("嵌套RecyclerView","最基础使用",NestedListActivity::class.java))
         return models
     }
 
+    override fun onEventTransmissionListener(
+        target: Any?,
+        params: Any?,
+        tag: Int,
+        callBack: EventTransmissionListener.CallBack?
+    ): Any? {
+        if (target is SongViewHolder) {
+            if (tag == 1) {
 
+            }
+        }
+        return null
+    }
+
+    override fun onItemClick(parent: RecyclerView?, view: View?, position: Int, model: Model?) {
+        if (model is MenuItemModel) {
+            val  data:MenuItemModel = model as MenuItemModel
+            var intent = Intent(this@MainActivity,data.activityClass)
+            startActivity(intent)
+        }
+
+    }
 
 }

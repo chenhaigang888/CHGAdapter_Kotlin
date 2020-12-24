@@ -8,20 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * 封装的ViewHolder类
  */
-open class ViewHolder<M : Model> constructor(
-    itemView: View,
-    eventTransmissionListener: EventTransmissionListener?,
-    parent: ViewGroup?
-) : RecyclerView.ViewHolder(itemView),ViewHolderLifeCycle<M> ,Notify{
+abstract class ViewHolder<M : Model> constructor(itemView: View, eventTransmissionListener: EventTransmissionListener?, parent: ViewGroup?) : RecyclerView.ViewHolder(itemView),ViewHolderLifeCycle<M> ,Notify{
 
     private var eventTransmissionListener: EventTransmissionListener? = null
     private var parent: ViewGroup? = null
     private var model: M? = null
-
-    init {
-        this.eventTransmissionListener = eventTransmissionListener
-        this.parent = parent
-    }
 
     /**
      * 快捷的方法
@@ -34,6 +25,8 @@ open class ViewHolder<M : Model> constructor(
     ):Any?{
         return eventTransmissionListener?.onEventTransmissionListener(target, params, tag, callBack)
     }
+
+    abstract fun onCreated();
 
     open fun <T : View?> findViewById(@IdRes id: Int): T? {
         return itemView.findViewById<T>(id)
