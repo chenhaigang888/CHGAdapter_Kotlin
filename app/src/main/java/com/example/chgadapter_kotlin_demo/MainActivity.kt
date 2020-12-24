@@ -37,9 +37,6 @@ class MainActivity : AppCompatActivity(){
                 return null
             }
         })
-
-
-
     }
 
     fun getAnimals(): List<Animals> {
