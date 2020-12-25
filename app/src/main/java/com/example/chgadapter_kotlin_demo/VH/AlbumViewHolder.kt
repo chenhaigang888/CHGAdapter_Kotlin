@@ -28,3 +28,4 @@ class AlbumViewHolder(
         songer?.text = model?.songer
     }
 }
+

@@ -22,7 +22,6 @@ open class MainActivity : AppCompatActivity(),EventTransmissionListener,Adapter.
         //接收ItemView的中的事件
         recyclerView.eventTransmissionListener = this
         recyclerView.setOnItemClickListener(this)
-
     }
 
     open fun getModels(): List<Model> {
@@ -30,6 +29,8 @@ open class MainActivity : AppCompatActivity(),EventTransmissionListener,Adapter.
         models.add(MenuItemModel("简单的显示（显示一种布局）","最基础使用",SongActivity::class.java))
         models.add(MenuItemModel("简单的显示（显示多种布局）","最基础使用",RecommendActivity::class.java))
         models.add(MenuItemModel("嵌套RecyclerView","最基础使用",NestedListActivity::class.java))
+        models.add(MenuItemModel("ItemView中的按钮点击、等事件","基础的使用",EventHanlderActivity::class.java))
+        models.add(MenuItemModel("设置自定义数据","基础的使用",CustomDataActivity::class.java))
         return models
     }
 

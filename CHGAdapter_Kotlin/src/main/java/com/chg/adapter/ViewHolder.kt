@@ -1,7 +1,9 @@
 package com.chg.adapter
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 
@@ -13,6 +15,16 @@ abstract class ViewHolder<M : Model> constructor(itemView: View, eventTransmissi
     private var eventTransmissionListener: EventTransmissionListener? = null
     private var parent: ViewGroup? = null
     private var model: M? = null
+
+
+    init {
+        this.eventTransmissionListener = eventTransmissionListener
+        this.parent = parent
+    }
+
+    fun getContext():Context{
+        return itemView.context
+    }
 
     /**
      * 快捷的方法
@@ -28,7 +40,7 @@ abstract class ViewHolder<M : Model> constructor(itemView: View, eventTransmissi
 
     abstract fun onCreated();
 
-    open fun <T : View?> findViewById(@IdRes id: Int): T? {
+    open fun <T : View?> findViewById(@IdRes id: Int): T {
         return itemView.findViewById<T>(id)
     }
 
@@ -49,6 +61,7 @@ abstract class ViewHolder<M : Model> constructor(itemView: View, eventTransmissi
         return getAdapter()?.getCustomData()
     }
 
+    @SuppressWarnings("unchecked")
     open fun getAdapter(): Adapter<M>? {
         return (getParent() as RecyclerView).adapter as Adapter<M>?
     }
