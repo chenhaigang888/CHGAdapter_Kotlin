@@ -33,11 +33,11 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>(), View.OnCli
     }
 
      interface OnItemClickListener {
-        fun onItemClick(parent: RecyclerView?, view: View?, position: Int, model: Model?)
+        fun onItemClick(parent: RecyclerView?, view: View?, position: Int?, model: Model?)
     }
 
      interface OnItemLongClickListener {
-        fun onItemLongClick(parent: RecyclerView?, view: View?, position: Int, model: Model?): Boolean
+        fun onItemLongClick(parent: RecyclerView?, view: View?, position: Int?, model: Model?): Boolean
     }
 
     /**
@@ -195,10 +195,9 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>(), View.OnCli
     override fun onLongClick(v: View?): Boolean {
         if (onItemLongClickListener !== null) {
             val position: Int? = recyclerView?.getChildAdapterPosition(v!!)
-            position?.let {
-                onItemLongClickListener?.onItemLongClick(recyclerView,v,
-                    it,getModels()?.get(position))
-            }
+            return onItemLongClickListener?.onItemLongClick(recyclerView,v,position,getModels()?.get(
+                position!!
+            ))!!
         }
         return true
     }
