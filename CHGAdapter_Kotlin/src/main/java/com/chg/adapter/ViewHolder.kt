@@ -155,4 +155,10 @@ abstract class ViewHolder<M : Model> constructor(itemView: View, eventTransmissi
     override fun onViewRecycled() {
 
     }
+
+    override fun onBindViewHolder(
+        payloads: MutableList<Any>
+    ) {
+
+    }
 }

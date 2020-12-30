@@ -11,6 +11,10 @@ import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.demo.VH.SongViewHolder
 import com.example.chgadapter_kotlin_demo.demo.model.MenuItemModel
 import com.example.chgadapter_kotlin_demo.search.activity.SearchActivity
+import com.example.chgadapter_kotlin_demo.search.model.GroupModel
+import com.example.chgadapter_kotlin_demo.search.model.PostModel
+import com.example.chgadapter_kotlin_demo.search.model.SearchSuggestionsModel
+import com.example.chgadapter_kotlin_demo.search.model.TagModel
 
 open class MainActivity : AppCompatActivity(),EventTransmissionListener,Adapter.OnItemClickListener,Adapter.OnItemLongClickListener{
 
@@ -29,7 +33,7 @@ open class MainActivity : AppCompatActivity(),EventTransmissionListener,Adapter.
     }
 
     open fun getModels(): List<Model> {
-        var models = mutableListOf<MenuItemModel>()
+        var models = mutableListOf<Model>()
         models.add(MenuItemModel("简单的显示（显示一种布局）","最基础使用", SongActivity::class.java))
         models.add(MenuItemModel("简单的显示（显示多种布局）","最基础使用", RecommendActivity::class.java))
         models.add(MenuItemModel("嵌套RecyclerView","最基础使用", NestedListActivity::class.java))

@@ -147,6 +147,12 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>(), View.OnCli
         viewHolder.onBindViewHolder(models?.get(position))
     }
 
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(holder, position, payloads)
+
+        val viewHolder: ViewHolder<M> = holder as ViewHolder<M>
+        viewHolder.onBindViewHolder(payloads)
+    }
 
     /**
      * （当Item进入这个页面的时候调用）
@@ -158,6 +164,8 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>(), View.OnCli
         super.onViewAttachedToWindow(holder)
         (holder as ViewHolder<M>).onViewAttachedToWindow()
     }
+
+
 
     /**
      * （当Item离开这个页面的时候调用）

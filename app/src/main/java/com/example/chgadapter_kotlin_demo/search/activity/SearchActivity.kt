@@ -73,7 +73,14 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
             } else if(text.length % 5 == 3){
                 list.add(PostModel("帖子内容： $text  $i"))
             }
-            list.add(AdviceModel("搜索建议： $text  $i"))
+
+            //建议的内容数据太少，多加一些😄
+            list.add(AdviceModel("搜索建议： $text  $i+1"))
+            list.add(AdviceModel("搜索建议： $text  $i+2"))
+            list.add(AdviceModel("搜索建议： $text  $i+3"))
+            list.add(AdviceModel("搜索建议： $text  $i+4"))
+            list.add(AdviceModel("搜索建议： $text  $i+5"))
+
         }
         return list
     }

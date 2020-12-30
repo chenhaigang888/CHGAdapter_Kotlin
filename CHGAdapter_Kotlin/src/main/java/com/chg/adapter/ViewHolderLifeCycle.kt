@@ -1,5 +1,7 @@
 package com.chg.adapter
 
+import androidx.recyclerview.widget.RecyclerView
+
 /**
  * ViewHolder生命周期
  */
@@ -12,6 +14,7 @@ package com.chg.adapter
      */
      fun onBindViewHolder(model: M?)
 
+    fun onBindViewHolder(payloads: MutableList<Any>)
     /**
      * 将要显示
      */
