@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    >
-<Button
-    android:id="@+id/addFriendBtn"
-    android:layout_width="55dp"
-    android:layout_height="28dp"
-    android:layout_alignParentRight="true"
-    android:background="#1E1E1E"
-    android:textSize="13sp"
-    android:layout_centerVertical="true"
-    android:layout_marginRight="20dp"
-    android:textColor="#FFFFFF"
-    android:text="加好友"/>
-    
+    android:layout_height="100dp">
     <LinearLayout
-        android:layout_toLeftOf="@id/addFriendBtn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
@@ -27,7 +13,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="#B3B3B3"/>
+            android:background="#00ffff"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,8 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9.33dp"
+                android:text="来自聊天"
                 android:lines="1"
-                android:text="微信号:100682"
                 android:textColor="#ff464646"
                 android:textSize="14sp"
                 />

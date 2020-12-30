@@ -9,9 +9,9 @@ import com.example.chgadapter_kotlin_demo.search.VH.SearchResultViewHolder
  */
 class SearchResultModel : Model {
 
-    var resultModels:List<SearchResultItemModel>
+    var resultModels:List<Model>
 
-    constructor(resultModels: List<SearchResultItemModel>) {
+    constructor(resultModels: List<Model>) {
         this.resultModels = resultModels
     }
 

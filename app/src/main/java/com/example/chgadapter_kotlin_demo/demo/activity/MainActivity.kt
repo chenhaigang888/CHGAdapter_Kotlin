@@ -19,7 +19,7 @@ open class MainActivity : AppCompatActivity(),EventTransmissionListener,Adapter.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerView)
         //设置数据
         recyclerView.models = getModels()
         //接收ItemView的中的事件

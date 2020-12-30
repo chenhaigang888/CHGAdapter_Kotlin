@@ -61,8 +61,18 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
     }
 
     fun createAdvices(text:String):List<Model>{
-        var list = mutableListOf<AdviceModel>()
+        var list = mutableListOf<Model>()
+
         for (i in 0..30) {
+            if (text.length % 5 == 0) {//模拟建议搜索的时候检测到用户
+                list.add(UserModel("用户： $text  $i"))
+            } else if(text.length % 5 == 1){//模拟建议搜索的时候检测到群
+                list.add(GroupModel("群组： $text  $i"))
+            } else if(text.length % 5 == 2){
+                list.add(PictureModel("图片 $text  $i"))
+            } else if(text.length % 5 == 3){
+                list.add(PostModel("帖子内容： $text  $i"))
+            }
             list.add(AdviceModel("搜索建议： $text  $i"))
         }
         return list
@@ -79,16 +89,27 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
     fun getSearchResults(keyword:String):TitleBarModel{
         var list = mutableListOf<TitleBarItemModel>()//搜索结果分类的标题
         var searchResults = mutableListOf<SearchResultModel>()//搜索分类结果
-        val titles = listOf("综合", "校友", "关系","用户","群聊","圈子","聊天记录","私藏","视频","图片","文章","音乐","语音","文字")
-        val titleTypes = listOf(0, 1, 2,3,4,5,6,7,8,9,10,11,12,13)
+        val titles = listOf("综合","帖子", "用户","群聊","图片")
+        val titleTypes = listOf(0, 1, 2,3,4)
         var j = 0
         for (title in titles) {
             //构造横向滚动的标题
             list.add(TitleBarItemModel(title))
             //构造搜索结果数据
-            var searchResultItemModels = mutableListOf<SearchResultItemModel>()
+            var searchResultItemModels = mutableListOf<Model>()
             for (i in 0..100) {
-                searchResultItemModels.add(SearchResultItemModel(titleTypes[j],"搜索结果:$title $keyword $i"))
+                if (j == 0) {
+                    searchResultItemModels.add(SearchResultItemModel(titleTypes[j],"搜索结果:$title $keyword $i"))
+                } else if(j == 1){
+                    searchResultItemModels.add(UserModel("用户： $keyword  $i"))
+                } else if(j == 2){
+                    searchResultItemModels.add(PostModel("帖子内容： $keyword  $i\""))
+                } else if(j == 3){
+                    searchResultItemModels.add(GroupModel("群： $keyword  $i"))
+                } else if(j == 4) {
+                    searchResultItemModels.add(PictureModel("图片 $keyword  $i"))
+                }
+
             }
             searchResults.add(SearchResultModel(searchResultItemModels))
             j+=1

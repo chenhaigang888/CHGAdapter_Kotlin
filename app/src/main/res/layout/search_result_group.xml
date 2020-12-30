@@ -13,7 +13,7 @@
     android:layout_centerVertical="true"
     android:layout_marginRight="20dp"
     android:textColor="#FFFFFF"
-    android:text="加好友"/>
+    android:text="聊天"/>
     
     <LinearLayout
         android:layout_toLeftOf="@id/addFriendBtn"
@@ -27,7 +27,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="#B3B3B3"/>
+            android:background="#ffff00"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,8 +38,8 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="胖虎"
                 android:lines="1"
+                android:text="胖虎"
                 android:textColor="#ffef3024"
                 android:textSize="16sp"
                 />
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9.33dp"
                 android:lines="1"
-                android:text="微信号:100682"
+                android:text="群号:325523733"
                 android:textColor="#ff464646"
                 android:textSize="14sp"
                 />

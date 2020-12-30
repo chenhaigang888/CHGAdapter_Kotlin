@@ -19,10 +19,14 @@ class SearchResultItemModel : Model {
 //        if (type == 0) {
 //
 //        } else if (type == 1) {
-            return R.layout.search_result_xiaoyou
+//            return R.layout.search_result_user
+//        } else if (type == 2) {
+//            return R.layout.search_result_user
+//        } else if (type == 3) {
+//            return R.layout.search_result_user
 //        }
-//
-//        return R.layout.search_result_user
+
+        return R.layout.search_result_xiaoyou
     }
 
     override fun getHolderClass(position: Int): Class<*> {
