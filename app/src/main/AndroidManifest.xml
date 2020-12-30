@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".demo.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,22 +20,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SongActivity"
+        <activity android:name=".demo.activity.SongActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".RecommendActivity"
+        <activity android:name=".demo.activity.RecommendActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".NestedListActivity"
+        <activity android:name=".demo.activity.NestedListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".EventHanlderActivity"
+        <activity android:name=".demo.activity.EventHanlderActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".CustomDataActivity"
+        <activity android:name=".demo.activity.CustomDataActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity android:name=".search.activity.SearchActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

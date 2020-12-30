@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_marginLeft="2dp"
+            android:layout_width="52dp"
+            android:layout_height="30dp"
+            android:background="#00000000"
+            android:textSize="14sp"
+            android:text="搜索"
+            android:layout_alignParentRight="true"
+            tools:ignore="MissingConstraints" />
+        <EditText
+            android:id="@+id/editText"
+            android:layout_toLeftOf="@id/searchButton"
+            android:layout_width="match_parent"
+            android:textSize="14sp"
+            android:background="#F0F0F0"
+            android:layout_height="30dp"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="7dp"
+        android:background="#DCDCDC"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"/>
+
+</LinearLayout>
