@@ -20,6 +20,8 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mEditText:EditText
 
+    private var historySearchData = mutableListOf<TagModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
@@ -36,10 +38,7 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
     //默认数据，显示历史搜索和热么搜索
     fun defaultData():List<Model> {
         //构造历史搜索数据
-        var historySearchData = mutableListOf<TagModel>()
-        for (i in 0..10) {
-            historySearchData.add(TagModel("历史：$i"))
-        }
+
         var historySearch = SearchSuggestionsModel("历史搜索",historySearchData)
 
         //构造热么搜索数据
@@ -48,7 +47,11 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
             hotSearchData.add(TagModel("热门：$i"))
         }
         var hotSearch = SearchSuggestionsModel("热门搜索",hotSearchData)
-        return listOf(historySearch,hotSearch)
+        if (historySearchData.count() > 0) {
+            return  listOf(historySearch,hotSearch)
+        } else {
+            return listOf(hotSearch)
+        }
     }
 
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
@@ -98,10 +101,11 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
     }
 
     fun getSearchResults(keyword:String):TitleBarModel{
+        historySearchData.add(TagModel(keyword))
         var list = mutableListOf<TitleBarItemModel>()//搜索结果分类的标题
         var searchResults = mutableListOf<SearchResultModel>()//搜索分类结果
-        val titles = listOf("综合","帖子", "用户","群聊","图片")
-        val titleTypes = listOf(0, 1, 2,3,4)
+        val titles = listOf("综合","帖子", "用户","群聊","图片","综合1","帖子1", "用户1","群聊1","图片1")
+        val titleTypes = listOf(0, 1, 2, 3, 4, 0, 1, 2, 3, 4)
         var j = 0
         for (title in titles) {
             //构造横向滚动的标题
@@ -109,18 +113,17 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
             //构造搜索结果数据
             var searchResultItemModels = mutableListOf<Model>()
             for (i in 0..100) {
-                if (j == 0) {
+                if (j == 0 || j == 5) {
                     searchResultItemModels.add(SearchResultItemModel(titleTypes[j],"搜索结果:$title $keyword $i"))
-                } else if(j == 1){
+                } else if(j == 1 || j == 6){
                     searchResultItemModels.add(PostModel("帖子内容： $keyword  $i"))
-                } else if(j == 2){
+                } else if(j == 2 || j == 7){
                     searchResultItemModels.add(UserModel("用户： $keyword  $i"))
-                } else if(j == 3){
+                } else if(j == 3 || j == 8){
                     searchResultItemModels.add(GroupModel("群： $keyword  $i"))
-                } else if(j == 4) {
+                } else if(j == 4 || j == 9) {
                     searchResultItemModels.add(PictureModel("图片 $keyword  $i"))
                 }
-
             }
             searchResults.add(SearchResultModel(searchResultItemModels))
             j+=1

@@ -1,7 +1,6 @@
 package com.example.chgadapter_kotlin_demo.search.VH
 
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -19,6 +18,7 @@ class TitleBarViewHolder(
 
     private lateinit var mRecyclerView:RecyclerView
     private lateinit var mResultsRecyclerView:RecyclerView
+    //记录搜索结果左右滚动的位置
     private var mResultsRecyclerViewScrollTotal_dx = 0
 
     override fun onCreated() {
@@ -27,11 +27,11 @@ class TitleBarViewHolder(
         mResultsRecyclerView.eventTransmissionListener = getEventTransmissionListener()
         mRecyclerView.setOnItemClickListener(this)
 
+        //监听搜索结果左右滚动，以更新顶部的tab
         mResultsRecyclerView.addOnScrollListener(object : OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == 0) {
-                    Log.i("chg","total_dx:"+mResultsRecyclerViewScrollTotal_dx)
                     val displayMetrics: DisplayMetrics = getContext().getResources().getDisplayMetrics()
                     val page = mResultsRecyclerViewScrollTotal_dx/ displayMetrics.widthPixels
                     getModel()?.currentPosition = page
@@ -51,20 +51,21 @@ class TitleBarViewHolder(
 
     override fun onBindViewHolder(model: TitleBarModel?) {
         super.onBindViewHolder(model)
+        //设置标题数据
         mRecyclerView.models = model?.barItems
         mRecyclerView.customData = model
         mRecyclerView.notifyDataSetChanged()
-
+        //设置搜索结果数据
         mResultsRecyclerView.models = model?.searchResults
         mResultsRecyclerView.notifyDataSetChanged()
-
+        //通过position 设置应该显示的页
         mResultsRecyclerViewScrollTotal_dx = model?.currentPosition!! * getContext().getResources().getDisplayMetrics().widthPixels
         mRecyclerView.scrollToPosition(model?.currentPosition!!)
         mResultsRecyclerView.scrollToPosition(model?.currentPosition!!)
     }
 
     override fun onItemClick(parent: RecyclerView?, view: View?, position: Int?, model: Model?) {
-        if (parent == mRecyclerView) {
+        if (parent == mRecyclerView) {//顶部tabItem被点击
             mResultsRecyclerViewScrollTotal_dx = position!! * getContext().getResources().getDisplayMetrics().widthPixels
             getModel()?.currentPosition = position!!
             mRecyclerView.scrollToPosition(position)
