@@ -187,7 +187,6 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>(), View.OnCli
         (holder as ViewHolder<M>).onViewRecycled()
     }
 
-
     override fun onClick(v: View?) {
         if (onItemClickListener != null) {
             val position: Int? = recyclerView?.getChildAdapterPosition(v!!)

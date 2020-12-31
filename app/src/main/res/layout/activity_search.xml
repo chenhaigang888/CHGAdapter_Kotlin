@@ -9,6 +9,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
         tools:ignore="MissingConstraints">
         <Button
             android:id="@+id/searchButton"
@@ -25,6 +28,8 @@
             android:layout_toLeftOf="@id/searchButton"
             android:layout_width="match_parent"
             android:textSize="14sp"
+            android:lines="1"
+            android:hint="请输入需要搜索的关键字"
             android:background="#F0F0F0"
             android:layout_height="30dp"/>
     </RelativeLayout>

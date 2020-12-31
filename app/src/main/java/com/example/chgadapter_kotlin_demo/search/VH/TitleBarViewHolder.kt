@@ -1,28 +1,50 @@
 package com.example.chgadapter_kotlin_demo.search.VH
 
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.chg.adapter.EventTransmissionListener
-import com.chg.adapter.ViewHolder
-import com.chg.adapter.models
-import com.chg.adapter.notifyDataSetChanged
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener
+import com.chg.adapter.*
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.search.model.TitleBarModel
-import kotlinx.android.synthetic.main.activity_search.view.*
 
 class TitleBarViewHolder(
     itemView: View,
     eventTransmissionListener: EventTransmissionListener?,
     parent: ViewGroup?
-) : ViewHolder<TitleBarModel>(itemView, eventTransmissionListener, parent) {
+) : ViewHolder<TitleBarModel>(itemView, eventTransmissionListener, parent), Adapter.OnItemClickListener{
+
     private lateinit var mRecyclerView:RecyclerView
     private lateinit var mResultsRecyclerView:RecyclerView
+    private var mResultsRecyclerViewScrollTotal_dx = 0
 
     override fun onCreated() {
         mRecyclerView = findViewById(R.id.recyclerView)
         mResultsRecyclerView = findViewById(R.id.resultsRecyclerView)
+        mResultsRecyclerView.eventTransmissionListener = getEventTransmissionListener()
+        mRecyclerView.setOnItemClickListener(this)
+
+        mResultsRecyclerView.addOnScrollListener(object : OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == 0) {
+                    Log.i("chg","total_dx:"+mResultsRecyclerViewScrollTotal_dx)
+                    val displayMetrics: DisplayMetrics = getContext().getResources().getDisplayMetrics()
+                    val page = mResultsRecyclerViewScrollTotal_dx/ displayMetrics.widthPixels
+                    getModel()?.currentPosition = page
+                    mRecyclerView.scrollToPosition(page)
+                    mRecyclerView.notifyDataSetChanged()
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                mResultsRecyclerViewScrollTotal_dx += dx
+            }
+        })
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(mResultsRecyclerView)
     }
@@ -30,9 +52,26 @@ class TitleBarViewHolder(
     override fun onBindViewHolder(model: TitleBarModel?) {
         super.onBindViewHolder(model)
         mRecyclerView.models = model?.barItems
+        mRecyclerView.customData = model
         mRecyclerView.notifyDataSetChanged()
 
         mResultsRecyclerView.models = model?.searchResults
         mResultsRecyclerView.notifyDataSetChanged()
+
+        mResultsRecyclerViewScrollTotal_dx = model?.currentPosition!! * getContext().getResources().getDisplayMetrics().widthPixels
+        mRecyclerView.scrollToPosition(model?.currentPosition!!)
+        mResultsRecyclerView.scrollToPosition(model?.currentPosition!!)
     }
+
+    override fun onItemClick(parent: RecyclerView?, view: View?, position: Int?, model: Model?) {
+        if (parent == mRecyclerView) {
+            mResultsRecyclerViewScrollTotal_dx = position!! * getContext().getResources().getDisplayMetrics().widthPixels
+            getModel()?.currentPosition = position!!
+            mRecyclerView.scrollToPosition(position)
+            mRecyclerView.notifyDataSetChanged()
+            mResultsRecyclerView.scrollToPosition(position)
+        }
+    }
+
+
 }

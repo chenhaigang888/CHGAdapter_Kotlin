@@ -6,6 +6,7 @@ import com.example.chgadapter_kotlin_demo.search.VH.TitleBarViewHolder
 
 class TitleBarModel:Model {
 
+    var currentPosition:Int = 0
     var barItems:List<TitleBarItemModel>
 
     var searchResults:List<SearchResultModel>
