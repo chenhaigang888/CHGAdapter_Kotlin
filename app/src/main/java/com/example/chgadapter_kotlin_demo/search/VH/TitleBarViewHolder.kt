@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.chg.adapter.*
+import com.chg.adapter.Extension.longToast
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.search.model.TitleBarModel
 
@@ -26,6 +27,8 @@ class TitleBarViewHolder(
         mResultsRecyclerView = findViewById(R.id.resultsRecyclerView)
         mResultsRecyclerView.eventTransmissionListener = getEventTransmissionListener()
         mRecyclerView.setOnItemClickListener(this)
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(mResultsRecyclerView)
 
         //监听搜索结果左右滚动，以更新顶部的tab
         mResultsRecyclerView.addOnScrollListener(object : OnScrollListener() {
@@ -45,8 +48,6 @@ class TitleBarViewHolder(
                 mResultsRecyclerViewScrollTotal_dx += dx
             }
         })
-        val snapHelper = PagerSnapHelper()
-        snapHelper.attachToRecyclerView(mResultsRecyclerView)
     }
 
     override fun onBindViewHolder(model: TitleBarModel?) {

@@ -1,6 +1,7 @@
 package com.chg.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -36,6 +37,17 @@ abstract class ViewHolder<M : Model> constructor(itemView: View, eventTransmissi
         callBack: EventTransmissionListener.CallBack?
     ):Any?{
         return eventTransmissionListener?.onEventTransmissionListener(target, params, tag, callBack)
+    }
+
+    /**
+     * 快捷的方法
+     */
+    open fun eventTransmission(
+        params: Any?,
+        tag: Int,
+        callBack: EventTransmissionListener.CallBack?
+    ):Any?{
+        return eventTransmission(this,params,tag,callBack)
     }
 
     abstract fun onCreated();

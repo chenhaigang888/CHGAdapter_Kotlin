@@ -1,5 +1,6 @@
 package com.example.chgadapter_kotlin_demo.search.VH
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -33,7 +34,7 @@ class SearchSuggestionsViewHolder(
                 position: Int?,
                 model: Model?
             ) {
-                eventTransmission(this@SearchSuggestionsViewHolder, model, 1, null)
+                eventTransmission( model, 1, null)
             }
         })
     }

@@ -1,31 +1,29 @@
 package com.example.chgadapter_kotlin_demo.search.activity
-import android.nfc.Tag
+
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.*
+import com.chg.adapter.Extension.longToast
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.search.VH.SearchResultViewHolder
 import com.example.chgadapter_kotlin_demo.search.VH.SearchSuggestionsViewHolder
 import com.example.chgadapter_kotlin_demo.search.model.*
-import kotlinx.android.synthetic.main.found_send_data_item.*
 
 class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListener,EventTransmissionListener,Adapter.OnItemClickListener{
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mEditText:EditText
 
-    private var historySearchData = mutableListOf<TagModel>()
+    private var mHistorySearchData = mutableListOf<TagModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-
         mRecyclerView = findViewById(R.id.recyclerView)
         mEditText = findViewById(R.id.editText);
         mEditText.setOnKeyListener(this)
@@ -38,16 +36,14 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
     //默认数据，显示历史搜索和热么搜索
     fun defaultData():List<Model> {
         //构造历史搜索数据
-
-        var historySearch = SearchSuggestionsModel("历史搜索",historySearchData)
-
+        var historySearch = SearchSuggestionsModel("历史搜索",mHistorySearchData)
         //构造热么搜索数据
         var hotSearchData = mutableListOf<TagModel>()
         for (i in 0..10) {
             hotSearchData.add(TagModel("热门：$i"))
         }
         var hotSearch = SearchSuggestionsModel("热门搜索",hotSearchData)
-        if (historySearchData.count() > 0) {
+        if (mHistorySearchData.count() > 0) {
             return  listOf(historySearch,hotSearch)
         } else {
             return listOf(hotSearch)
@@ -100,8 +96,11 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
         }
     }
 
+    /**
+     * 通过关键字返回搜索结果
+     */
     fun getSearchResults(keyword:String):TitleBarModel{
-        historySearchData.add(TagModel(keyword))
+        mHistorySearchData.add(TagModel(keyword))
         var list = mutableListOf<TitleBarItemModel>()//搜索结果分类的标题
         var searchResults = mutableListOf<SearchResultModel>()//搜索分类结果
         val titles = listOf("综合","帖子", "用户","群聊","图片","综合1","帖子1", "用户1","群聊1","图片1")
@@ -140,14 +139,17 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
         return null
     }
 
+    /**
+     * 处理点击搜索结果item
+     */
     fun handleSearchResultViewHolder(target: Any?, params: Any?, eventId: Int, callBack: EventTransmissionListener.CallBack?): Any? {
         if (eventId == 1) {//搜索结果ItemClick
-            Toast.makeText(this@SearchActivity,"搜索结果点击事件",Toast.LENGTH_LONG).show()
+            getContext().longToast("搜索结果点击事件")
         }
         return null
     }
 
-    //处理点击历史搜索，热么搜索
+    //处理点击历史搜索，热门搜索Item
     fun clickHistoryOrHotTag(target: Any?, params: Any?, eventId: Int, callBack: EventTransmissionListener.CallBack?) : Any?{
         var tag:TagModel = params as TagModel
         mEditText.setText(tag.name)
@@ -165,19 +167,19 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
                 mRecyclerView.notifyDataSetChanged()
             } else if(model is UserModel) {//点击用户
                 var userModel:UserModel = model
-                Toast.makeText(this@SearchActivity,"用户：${userModel.name}",Toast.LENGTH_LONG).show()
+                getContext().longToast("用户：${userModel.name}")
             } else if(model is PostModel) {//点击用户
                 var postModel:PostModel = model
-                Toast.makeText(this@SearchActivity,"帖子：${postModel.text}",Toast.LENGTH_LONG).show()
+                getContext().longToast("帖子：${postModel.text}")
             } else if(model is GroupModel) {//点击用户
                 var groupModel:GroupModel = model
-                Toast.makeText(this@SearchActivity,"群组：${groupModel.name}",Toast.LENGTH_LONG).show()
+                getContext().longToast("群组：${groupModel.name}")
             } else if(model is PictureModel) {//点击用户
                 var pictureModel:PictureModel = model
-                Toast.makeText(this@SearchActivity,"图片：${pictureModel.text}",Toast.LENGTH_LONG).show()
+                getContext().longToast("图片：${pictureModel.text}")
             } else if(model is SearchResultItemModel){
                 var searchResultItemModel:SearchResultItemModel = model
-                Toast.makeText(this@SearchActivity,"图片：${searchResultItemModel.title}",Toast.LENGTH_LONG).show()
+                getContext().longToast("图片：${searchResultItemModel.title}")
             }
         }
     }
