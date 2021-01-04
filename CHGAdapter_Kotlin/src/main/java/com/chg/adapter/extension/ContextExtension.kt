@@ -1,4 +1,4 @@
-package com.chg.adapter.Extension
+package com.chg.adapter.extension
 
 import android.content.Context
 import android.widget.Toast

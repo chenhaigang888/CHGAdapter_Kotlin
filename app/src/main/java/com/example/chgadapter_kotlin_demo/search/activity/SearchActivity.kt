@@ -8,7 +8,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.*
-import com.chg.adapter.Extension.longToast
+import com.chg.adapter.extension.*
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.search.VH.SearchResultViewHolder
 import com.example.chgadapter_kotlin_demo.search.VH.SearchSuggestionsViewHolder

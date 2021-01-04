@@ -5,6 +5,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.*
+import com.chg.adapter.extension.customData
+import com.chg.adapter.extension.eventTransmissionListener
+import com.chg.adapter.extension.models
 import com.example.chgadapter_kotlin_demo.demo.Other.LoginData
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.demo.VH.SubmitBtnViewHolder

@@ -7,6 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.*
+import com.chg.adapter.extension.models
+import com.chg.adapter.extension.notifyDataSetChanged
+import com.chg.adapter.extension.setOnItemClickListener
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.search.model.SearchSuggestionsModel
 import kotlinx.android.synthetic.main.search_suggestions_item.view.*

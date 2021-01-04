@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.chg.adapter.EventTransmissionListener
-import com.chg.adapter.Extension.longToast
+import com.chg.adapter.extension.longToast
 import com.chg.adapter.ViewHolder
 import com.example.chgadapter_kotlin_demo.demo.Other.LoginData
 import com.example.chgadapter_kotlin_demo.R

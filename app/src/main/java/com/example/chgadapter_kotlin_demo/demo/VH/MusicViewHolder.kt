@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.*
+import com.chg.adapter.extension.models
+import com.chg.adapter.extension.notifyDataSetChanged
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.demo.model.MusicModel
 

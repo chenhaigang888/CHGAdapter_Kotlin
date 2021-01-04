@@ -7,6 +7,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.*
+import com.chg.adapter.extension.eventTransmissionListener
+import com.chg.adapter.extension.models
+import com.chg.adapter.extension.setOnItemClickListener
+import com.chg.adapter.extension.setOnItemLongClickListener
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.demo.VH.SongViewHolder
 import com.example.chgadapter_kotlin_demo.demo.model.MenuItemModel

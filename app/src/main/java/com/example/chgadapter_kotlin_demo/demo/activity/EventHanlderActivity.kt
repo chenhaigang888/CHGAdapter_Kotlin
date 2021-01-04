@@ -5,9 +5,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.EventTransmissionListener
+import com.chg.adapter.extension.eventTransmissionListener
+import com.chg.adapter.extension.models
 import com.chg.adapter.Model
-import com.chg.adapter.eventTransmissionListener
-import com.chg.adapter.models
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.demo.VH.PlayListItemViewHolder
 import com.example.chgadapter_kotlin_demo.demo.model.PlayListItemModel

@@ -35,8 +35,8 @@ install {
                 developers {
                     developer {
                         id 'chenhaigang888' // 开发者的id。
-                        name 'chenhaigang888' // 开发者名字。
-                        email 'chenhaigang888@163.com' // 开发者邮箱。
+                        name 'chen' // 开发者名字。
+                        email 'chenhaigang888@icloud.com' // 开发者邮箱。
                     }
                 }
 
@@ -79,8 +79,8 @@ artifacts {
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 bintray {
-    user = properties.getProperty("bintray.user") // Bintray的用户名。
-    key = properties.getProperty("bintray.apikey") // Bintray刚才保存的ApiKey。
+    user = "chenhaigang888"//properties.getProperty("bintray.user") // Bintray的用户名。
+    key = "fe95a9df8dff13570f2cd3febc0d44bf63a03761"//properties.getProperty("bintray.apikey") // Bintray刚才保存的ApiKey。
 
     configurations = ['archives']
     pkg {

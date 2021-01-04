@@ -1,4 +1,4 @@
-package com.example.chgadapter_kotlin_demo.search.activity
+package com.chg.adapter.extension
 
 import android.app.Activity
 import android.content.Context
