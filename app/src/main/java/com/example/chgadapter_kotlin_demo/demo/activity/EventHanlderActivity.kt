@@ -42,7 +42,6 @@ class EventHanlderActivity : AppCompatActivity() {
                 return null
             }
         })
-
     }
 
     /*处理ItemView中的播放音乐的状态(演示同步返回数据)*/

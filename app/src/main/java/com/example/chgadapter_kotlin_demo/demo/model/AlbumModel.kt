@@ -13,7 +13,6 @@ open class AlbumModel : Model {
         this.songer = songer
     }
 
-
     override fun getResource(position: Int): Int {
         return R.layout.album_item
     }

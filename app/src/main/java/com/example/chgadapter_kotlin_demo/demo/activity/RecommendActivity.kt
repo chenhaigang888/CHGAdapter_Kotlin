@@ -1,14 +1,27 @@
 package com.example.chgadapter_kotlin_demo.demo.activity
 
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.Model
+import com.chg.adapter.extension.models
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.demo.model.AlbumModel
 import com.example.chgadapter_kotlin_demo.demo.model.SongModel
 
 
-class RecommendActivity : MainActivity() {
+class RecommendActivity : AppCompatActivity() {
+    private lateinit var recyclerView: RecyclerView
 
-    override fun getModels(): List<Model> {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        recyclerView = findViewById(R.id.recyclerView)
+        //设置数据
+        recyclerView.models = getModels()
+    }
+
+    fun getModels(): List<Model> {
         var models = mutableListOf<Model>()
         for (i in 0..99) {
             if (i % 2 == 0) {

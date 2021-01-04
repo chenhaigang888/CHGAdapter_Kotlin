@@ -31,6 +31,4 @@ class SongViewHolder(
         mNameTextView?.text = model?.name
         mSongerTextView?.text = model?.songer
     }
-
-
 }
