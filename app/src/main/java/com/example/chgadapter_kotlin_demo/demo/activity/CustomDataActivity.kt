@@ -6,9 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.*
-import com.chg.adapter.extension.customData
-import com.chg.adapter.extension.eventTransmissionListener
-import com.chg.adapter.extension.models
+import com.chg.adapter.extension.*
 import com.example.chgadapter_kotlin_demo.demo.Other.LoginData
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.demo.VH.SubmitBtnViewHolder
@@ -16,7 +14,7 @@ import com.example.chgadapter_kotlin_demo.demo.model.InputBoxModel
 import com.example.chgadapter_kotlin_demo.demo.model.OneTitleModel
 import com.example.chgadapter_kotlin_demo.demo.model.SubmitBtnModel
 
-//做一个登录页面来演示 在ItemView，Activity之间共享数据。这个主要颜色数据共享，并不一定要这么做。具体还是要看自己的需求
+//做一个登录页面来演示 在ItemView，Activity之间共享数据。这个主要演示数据共享，并不一定要这么做。具体还是要看自己的需求
 class CustomDataActivity : AppCompatActivity() ,EventTransmissionListener{
 
     private lateinit var recyclerView: RecyclerView
