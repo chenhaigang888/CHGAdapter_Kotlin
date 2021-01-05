@@ -80,7 +80,7 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 bintray {
     user = "chenhaigang888"//properties.getProperty("bintray.user") // Bintray的用户名。
-    key = "fe95a9df8dff13570f2cd3febc0d44bf63a03761"//properties.getProperty("bintray.apikey") // Bintray刚才保存的ApiKey。
+    key = ""//properties.getProperty("bintray.apikey") // Bintray刚才保存的ApiKey。
 
     configurations = ['archives']
     pkg {
