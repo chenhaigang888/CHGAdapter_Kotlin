@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/chenhaigang888/maven/CHGAdapter_Kotlin/images/download.svg) ](https://bintray.com/chenhaigang888/maven/CHGAdapter_Kotlin/_latestVersion)
+
 # CHGAdapter_Kotlin
 
 CHGAdapter_Kotlin简单快速的使用RecyclerView而不需要写Adapter。此框架是CHGAdapter的Kotlin版。
