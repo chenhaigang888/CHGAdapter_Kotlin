@@ -19,6 +19,7 @@ import com.example.chgadapter_kotlin_demo.search.model.GroupModel
 import com.example.chgadapter_kotlin_demo.search.model.PostModel
 import com.example.chgadapter_kotlin_demo.search.model.SearchSuggestionsModel
 import com.example.chgadapter_kotlin_demo.search.model.TagModel
+import com.example.chgadapter_kotlin_demo.weibo.activity.FoundActivity
 
 open class MainActivity : AppCompatActivity(),EventTransmissionListener,Adapter.OnItemClickListener,Adapter.OnItemLongClickListener{
 
@@ -43,7 +44,8 @@ open class MainActivity : AppCompatActivity(),EventTransmissionListener,Adapter.
         models.add(MenuItemModel("嵌套RecyclerView","最基础使用", NestedListActivity::class.java))
         models.add(MenuItemModel("ItemView中的按钮点击、等事件","基础的使用", EventHanlderActivity::class.java))
         models.add(MenuItemModel("设置自定义数据","基础的使用", CustomDataActivity::class.java))
-        models.add(MenuItemModel("比较复杂的演示","使用当前框架在一个页面展示搜索及结果展示", SearchActivity::class.java))
+        models.add(MenuItemModel("比较复杂的演示（搜索）","使用当前框架在一个页面展示搜索及结果展示", SearchActivity::class.java))
+        models.add(MenuItemModel("比较复杂的演示（微博）","使用当前框架模拟微博", FoundActivity::class.java))
         return models
     }
 

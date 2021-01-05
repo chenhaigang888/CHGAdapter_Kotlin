@@ -132,6 +132,7 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>(), View.OnCli
     }
 
     override fun getItemCount(): Int {
+        if (models == null)return 0
         return models?.size!!
     }
 
