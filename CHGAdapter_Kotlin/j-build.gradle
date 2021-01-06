@@ -10,7 +10,7 @@ def gitUrl = 'https://github.com/chenhaigang888/CHGAdapter_Kotlin' // Git仓库�
 group = "com.chg.adapter"
 
 //项目引用的版本号，比如implementation 'com.davis.ui.pulltorefresh:pulltorefresh:2.1.0'中的2.1.0就是这里配置的。
-version = "1.0.0"
+version = "1.0.1"
 
 install {
     repositories.mavenInstaller {

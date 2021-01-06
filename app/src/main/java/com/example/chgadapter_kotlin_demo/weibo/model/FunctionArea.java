@@ -3,7 +3,7 @@ package com.example.chgadapter_kotlin_demo.weibo.model;
 
 import com.chg.adapter.Model;
 import com.example.chgadapter_kotlin_demo.R;
-import com.example.chgadapter_kotlin_demo.weibo.VH.FunctionAreaViewHolder;
+import com.example.chgadapter_kotlin_demo.weibo.VH.HorizontalScrollViewHolder;
 
 import java.util.List;
 
@@ -21,11 +21,11 @@ public class FunctionArea implements Model {
 
     @Override
     public int getResource(int position) {
-        return R.layout.function_area;
+        return R.layout.horizontal_scroll;
     }
 
     @Override
     public Class getHolderClass(int position) {
-        return FunctionAreaViewHolder.class;
+        return HorizontalScrollViewHolder.class;
     }
 }

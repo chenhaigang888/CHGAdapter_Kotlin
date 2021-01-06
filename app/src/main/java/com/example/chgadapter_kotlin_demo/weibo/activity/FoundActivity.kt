@@ -25,7 +25,10 @@ import com.example.chgadapter_kotlin_demo.weibo.model.*
 import com.google.gson.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.internal.readFieldOrNull
 import java.io.IOException
+import java.io.InputStreamReader
+import java.io.Reader
 import java.io.Serializable
 import java.util.*
 
@@ -39,6 +42,7 @@ class FoundActivity : AppCompatActivity() {
     private var pageIndex = 0
     private var isPullRefresh: Boolean? = null
     private var isLoading : Boolean? = null//是否正在加载
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,40 +137,39 @@ class FoundActivity : AppCompatActivity() {
         }
     }
 
+    //刷新
+    fun refresh(){
+        runOnUiThread {
+            isLoading = false
+            swipeRefreshLayout.isRefreshing = false
+            recyclerView.models = recycleViewData
+            recyclerView.notifyDataSetChanged()
+        }
+    }
+
+    //模拟网络请求
     private fun postAsynHttp() {
         isLoading = true
         pageIndex += 1
-        val mOkHttpClient = OkHttpClient()
-        var params = mutableMapOf<Any, Any>()
+        //模拟网络请求
+        Thread(object :Runnable{
+            override fun run() {
+                var rawName = "weibo_data_$pageIndex"
+                val responseId = getContext().resources.getIdentifier(rawName,"raw",getContext().packageName)
+                if (responseId == 0){
+                    pageIndex = 0
+                    refresh()
+                    return
+                }
+                var inputStream = getContext().resources.openRawResource(responseId)
+                var inputStreamReader = InputStreamReader(inputStream)
+                var str = inputStreamReader.readText()
 
-        params["appId"] = "1003604205986484225"
-        params["lat"] = "0"
-        params["lng"] = "0"
-        params["pageIndex"] = pageIndex.toString() + ""
-        params["pageSize"] = "10"
-        params["platform"] = "ios"
-        params["timestamp"] = "1578715788332"
-        params["token"] =
-            "fcb525ba5eebef743a028fae49ff382c9387e2ed9d5e04fcee6913fc3ee4937b64a2104a27ef241b93c3d0baa401c0b39cb17883cfbbaf9895ebc813c245d22916bcd42b5c33121972592575ac2be4f0"
-        params["version"] = "1.1.4"
-        val gson = Gson()
-
-        val JSON: MediaType = "application/json; charset=utf-8".toMediaTypeOrNull()!!
-        val body = RequestBody.create(JSON, gson.toJson(params))
-        val request: Request = Request.Builder()
-            .url("https://api.dnaerapp.com/zoology/feed/mobile/v1/feeds")
-            .post(body)
-            .build()
-        val call = mOkHttpClient.newCall(request)
-        call.enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
-
-            @Throws(IOException::class)
-            override fun onResponse(call: Call, response: Response) {
-                val str = response.body!!.string()
-//                                Log.i("chg", "str:" + str);
+                val gson = Gson()
+                Log.i("chgwebodata", "str:" + str);
                 val serverResponse = gson.fromJson(str, ServerResponse::class.java)
                 val list = serverResponse.data
+                Log.i("chgWeibo","list:${list.count()}")
                 for (found in list) {
                     val type = found.type
                     val factor = found.factor
@@ -176,7 +179,7 @@ class FoundActivity : AppCompatActivity() {
                     } else if (type == "1") {
                         if (factor == "4") { //精彩小视频
                         } else { //发布的内容
-                            val foundSendData = parserJsonArray(gson.toJson(feedExts))
+                            val foundSendData = parserJsonArray(gson.toJson(feedExts),FoundSendData::class.java)
                             if (isPullRefresh!!) {
                                 recycleViewData.add(1, foundSendData[0])
                             } else {
@@ -184,20 +187,21 @@ class FoundActivity : AppCompatActivity() {
                             }
                         }
                     } else if (type == "2") { //好友推荐
+                        val recommendedFriendModel = RecommendedFriendModel()
+                        val foundUserModels = parserJsonArray(gson.toJson(feedExts),FoundUserModel::class.java)
+                        recommendedFriendModel.friends = foundUserModels
+                        recycleViewData.add(recommendedFriendModel)
                     }
                 }
                 runOnUiThread {
-                    isLoading = false
-                    swipeRefreshLayout.isRefreshing = false
-                    recyclerView.models = recycleViewData
-                    recyclerView.notifyDataSetChanged()
+                    refresh()
                 }
             }
-        })
+        }).start()
     }
 
-    fun parserJsonArray(strJson: String?): ArrayList<FoundSendData> {
-        val list = ArrayList<FoundSendData>()
+    fun parserJsonArray(strJson: String?,classT:Class<*>): ArrayList<Model> {
+        val list = ArrayList<Model>()
         //创建一个Gson对象
         val gson = Gson()
         //创建一个JsonParser
@@ -219,7 +223,7 @@ class FoundActivity : AppCompatActivity() {
         while (it.hasNext()) {
             val e = it.next() as JsonElement
             //JsonElement转换为JavaBean对象
-            list.add(gson.fromJson(e, FoundSendData::class.java))
+            list.add(gson.fromJson(e, classT) as Model)
         }
         return list
     }
@@ -245,7 +249,6 @@ class FoundActivity : AppCompatActivity() {
         var funcItem: FuncItem? = null
         for (i in 0..(funcs.count()-1) ) {
             Log.i("chgLog","i:$i")
-
             funcItem = FuncItem()
             funcItem.name = funcs[i]
             funcItem.icon = icons[i]

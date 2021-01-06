@@ -40,19 +40,4 @@ dependencies {
 
 apply from: 'j-build.gradle'
 
-//
-//publish {
-//    userOrg = 'chenhaigang888'
-//    repoName = 'maven'
-//    groupId = 'com.chg.adapter'
-//    artifactId = 'CHGAdapter_Kotlin'
-//    publishVersion = '1.0.0'
-//    version = '1.0.0'
-//    licences = 'Apache-2.0'
-//    description = '快速使用RecyclerView'
-//    website = 'https://github.com/chenhaigang888/CHGAdapter_Kotlin'
-//    repository = 'https://github.com/chenhaigang888/CHGAdapter_Kotlin'
-//    bintrayUser = "chenhaigang888" // 账户名
-//    bintrayKey = 'fe95a9df8dff13570f2cd3febc0d44bf63a03761' // 就是API key
-//}
 

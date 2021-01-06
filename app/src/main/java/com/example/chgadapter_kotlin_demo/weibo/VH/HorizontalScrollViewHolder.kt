@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.EventTransmissionListener
+import com.chg.adapter.Model
 import com.chg.adapter.ViewHolder
 import com.chg.adapter.extension.eventTransmissionListener
 import com.chg.adapter.extension.models
@@ -14,12 +15,13 @@ import com.chg.adapter.extension.notifyItemChanged
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.weibo.model.FuncItem
 import com.example.chgadapter_kotlin_demo.weibo.model.FunctionArea
+import com.example.chgadapter_kotlin_demo.weibo.model.RecommendedFriendModel
 
-class FunctionAreaViewHolder(
+class HorizontalScrollViewHolder(
     itemView: View,
     eventTransmissionListener: EventTransmissionListener?,
     parent: ViewGroup?
-) : ViewHolder<FunctionArea>(itemView, eventTransmissionListener, parent) {
+) : ViewHolder<Model>(itemView, eventTransmissionListener, parent) {
     private lateinit var recycleView: RecyclerView
 
     override fun onCreated() {
@@ -29,9 +31,16 @@ class FunctionAreaViewHolder(
         recycleView.layoutManager = manager
     }
 
-    override fun onBindViewHolder(model: FunctionArea?) {
+    override fun onBindViewHolder(model: Model?) {
         super.onBindViewHolder(model)
-        recycleView.models = model!!.funcItems
+
+        if (model is FunctionArea) {
+            val temp:FunctionArea = model
+            recycleView.models = temp.funcItems
+        } else if (model is RecommendedFriendModel) {
+            val temp:RecommendedFriendModel = model
+            recycleView.models = temp.friends
+        }
         recycleView.eventTransmissionListener = getEventTransmissionListener()
         recycleView.notifyDataSetChanged()
     }
