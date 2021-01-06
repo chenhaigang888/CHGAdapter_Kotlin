@@ -223,7 +223,7 @@ class FoundActivity : AppCompatActivity(),EventTransmissionListener,SlideMomentu
     }
 
     override fun onRemainingAmount(): Int {
-        return 30
+        return 30//设置列表中的数据少于30条的情况下触发onArriveRemainingAmount方法执行
     }
 
     override fun onArriveRemainingAmount() {

@@ -67,11 +67,11 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
         for (i in 0..30) {
             if (text.length % 5 == 0) {//模拟建议搜索的时候检测到用户
                 list.add(UserModel("用户： $text  $i"))
-            } else if(text.length % 5 == 1){//模拟建议搜索的时候检测到群
+            } else if(text.length % 5 == 1) {//模拟建议搜索的时候检测到群
                 list.add(GroupModel("群组： $text  $i"))
-            } else if(text.length % 5 == 2){
+            } else if(text.length % 5 == 2) {
                 list.add(PictureModel("图片 $text  $i"))
-            } else if(text.length % 5 == 3){
+            } else if(text.length % 5 == 3) {
                 list.add(PostModel("帖子内容： $text  $i"))
             }
             //建议的内容数据太少，多加一些😄
@@ -109,11 +109,11 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
             for (i in 0..100) {
                 if (j == 0 || j == 4) {
                     searchResultItemModels.add(PostModel("帖子内容： $keyword  $i"))
-                } else if(j == 1 || j == 5){
+                } else if(j == 1 || j == 5) {
                     searchResultItemModels.add(UserModel("用户： $keyword  $i"))
-                } else if(j == 2 || j == 6){
+                } else if(j == 2 || j == 6) {
                     searchResultItemModels.add(GroupModel("群： $keyword  $i"))
-                } else if(j == 3 || j == 7){
+                } else if(j == 3 || j == 7) {
                     searchResultItemModels.add(PictureModel("图片 $keyword  $i"))
                 }
             }
