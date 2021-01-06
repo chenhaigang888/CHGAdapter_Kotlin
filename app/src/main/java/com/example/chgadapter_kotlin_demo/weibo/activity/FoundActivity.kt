@@ -38,8 +38,7 @@ class FoundActivity : AppCompatActivity() {
     private var functionArea: FunctionArea = FunctionArea()
     private var pageIndex = 0
     private var isPullRefresh: Boolean? = null
-    private var isLoading //是否正在加载
-            : Boolean? = null
+    private var isLoading : Boolean? = null//是否正在加载
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,7 +133,6 @@ class FoundActivity : AppCompatActivity() {
         }
     }
 
-
     private fun postAsynHttp() {
         isLoading = true
         pageIndex += 1
@@ -206,7 +204,6 @@ class FoundActivity : AppCompatActivity() {
         val parser = JsonParser()
         //通过JsonParser对象可以把json格式的字符串解析成一个JsonElement对象
         val el = parser.parse(strJson)
-
         //把JsonElement对象转换成JsonObject
         var jsonObj: JsonObject? = null
         if (el.isJsonObject) {
