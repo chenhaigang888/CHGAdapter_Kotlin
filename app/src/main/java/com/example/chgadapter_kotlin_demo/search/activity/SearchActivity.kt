@@ -76,14 +76,12 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
             } else if(text.length % 5 == 3){
                 list.add(PostModel("帖子内容： $text  $i"))
             }
-
             //建议的内容数据太少，多加一些😄
             list.add(AdviceModel("搜索建议： $text  $i+1"))
             list.add(AdviceModel("搜索建议： $text  $i+2"))
             list.add(AdviceModel("搜索建议： $text  $i+3"))
             list.add(AdviceModel("搜索建议： $text  $i+4"))
             list.add(AdviceModel("搜索建议： $text  $i+5"))
-
         }
         return list
     }
@@ -103,8 +101,7 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
         mHistorySearchData.add(TagModel(keyword))
         var list = mutableListOf<TitleBarItemModel>()//搜索结果分类的标题
         var searchResults = mutableListOf<SearchResultModel>()//搜索分类结果
-        val titles = listOf("综合","帖子", "用户","群聊","图片","综合1","帖子1", "用户1","群聊1","图片1")
-        val titleTypes = listOf(0, 1, 2, 3, 4, 0, 1, 2, 3, 4)
+        val titles = listOf("帖子", "用户","群聊","图片","帖子1", "用户1","群聊1","图片1")
         var j = 0
         for (title in titles) {
             //构造横向滚动的标题
@@ -112,21 +109,32 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
             //构造搜索结果数据
             var searchResultItemModels = mutableListOf<Model>()
             for (i in 0..100) {
-                if (j == 0 || j == 5) {
-                    searchResultItemModels.add(SearchResultItemModel(titleTypes[j],"搜索结果:$title $keyword $i"))
-                } else if(j == 1 || j == 6){
+                if (j == 0 || j == 4) {
                     searchResultItemModels.add(PostModel("帖子内容： $keyword  $i"))
-                } else if(j == 2 || j == 7){
+                } else if(j == 1 || j == 5){
                     searchResultItemModels.add(UserModel("用户： $keyword  $i"))
-                } else if(j == 3 || j == 8){
+                } else if(j == 2 || j == 6){
                     searchResultItemModels.add(GroupModel("群： $keyword  $i"))
-                } else if(j == 4 || j == 9) {
+                } else if(j == 3 || j == 7){
                     searchResultItemModels.add(PictureModel("图片 $keyword  $i"))
                 }
             }
             searchResults.add(SearchResultModel(searchResultItemModels))
             j+=1
         }
+
+        //构造综合显示数据,从每一个分类中获取3个用来显示在综合中
+        var comprehensiveData = mutableListOf<Model>()
+        for (m in 0..(searchResults.count()-1)) {
+            comprehensiveData.add(HeaderTitleModel("${titles[m]}"))
+            comprehensiveData.add(searchResults[m].resultModels[0])
+            comprehensiveData.add(searchResults[m].resultModels[1])
+            comprehensiveData.add(searchResults[m].resultModels[2])
+            comprehensiveData.add(FooterTitleModel("查看${searchResults[m].resultModels.count()}个搜索结果(${titles[m]})"))
+        }
+        val comprehensiveSearchResultModel = SearchResultModel(comprehensiveData)
+        searchResults.add(0,comprehensiveSearchResultModel)
+        list.add(0,TitleBarItemModel("综合"))//添加一个综合类的tab
         return TitleBarModel(list,searchResults)
     }
 

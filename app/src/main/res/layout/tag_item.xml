@@ -8,7 +8,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:lines="1"
+    android:layout_margin="2dp"
     android:gravity="center"
-    android:background="#ffff00"
     android:text="标签"/>
 </LinearLayout>

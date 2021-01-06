@@ -30,14 +30,11 @@ class FuncItemViewHolder(
         if (model != null) {
             icon.setImageResource(model.icon)
         }
-        if (model != null) {
-            name.text = model.name
-        }
-
+        name.text = model?.name
 
         itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
-                eventTransmission(this,getModel(),0,null)
+                eventTransmission(this@FuncItemViewHolder,getModel(),0,null)
             }
         })
     }

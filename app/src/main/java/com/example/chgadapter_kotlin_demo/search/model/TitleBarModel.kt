@@ -8,7 +8,6 @@ class TitleBarModel:Model {
 
     var currentPosition:Int = 0
     var barItems:List<TitleBarItemModel>
-
     var searchResults:List<SearchResultModel>
 
     constructor(barItems: List<TitleBarItemModel>,searchResults:List<SearchResultModel>) {

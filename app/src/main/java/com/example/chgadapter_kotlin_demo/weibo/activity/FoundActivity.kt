@@ -72,6 +72,7 @@ class FoundActivity : AppCompatActivity() {
                 eventId: Int,
                 callBack: CallBack?
             ): Any? {
+                Log.i("chgLog","点击")
                 if (target is FuncItemViewHolder) {
                     val intent = Intent(getContext(), SearchActivity::class.java)
                     startActivity(intent)
@@ -259,12 +260,5 @@ class FoundActivity : AppCompatActivity() {
         return functionArea
     }
 
-    fun onEventTransmissionListener(
-        target: Any?,
-        params: Any?,
-        eventId: Int,
-        callBack: CallBack?
-    ): Any? {
-        return null
-    }
+
 }

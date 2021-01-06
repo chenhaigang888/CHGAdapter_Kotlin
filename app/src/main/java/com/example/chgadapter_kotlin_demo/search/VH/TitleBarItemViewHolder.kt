@@ -30,10 +30,11 @@ class TitleBarItemViewHolder(
         mTitle.setText(model?.title)
         if (getCustomData() is TitleBarModel) {
             var customData: TitleBarModel = getCustomData() as TitleBarModel
+
             if (customData.currentPosition == adapterPosition) {
-                mTitle.setTextColor(getContext().getColor(R.color.colorPrimaryDark))
+                mTitle.setTextColor(getContext().getColor(R.color.tab_selected))
             } else {
-                mTitle.setTextColor(getContext().getColor(R.color.colorAccent))
+                mTitle.setTextColor(getContext().getColor(R.color.tab_normal))
             }
         }
 

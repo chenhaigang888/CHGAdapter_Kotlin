@@ -27,11 +27,14 @@
             android:id="@+id/editText"
             android:layout_toLeftOf="@id/searchButton"
             android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:textSize="14sp"
             android:lines="1"
             android:hint="请输入需要搜索的关键字"
             android:background="#F0F0F0"
-            android:layout_height="30dp"/>
+            />
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
