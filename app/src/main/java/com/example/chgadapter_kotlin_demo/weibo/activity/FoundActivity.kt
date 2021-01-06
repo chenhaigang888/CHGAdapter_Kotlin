@@ -164,7 +164,10 @@ class FoundActivity : AppCompatActivity() {
                 var inputStream = getContext().resources.openRawResource(responseId)
                 var inputStreamReader = InputStreamReader(inputStream)
                 var str = inputStreamReader.readText()
+                inputStream.close()
+                inputStreamReader.close()
 
+                //解析数据
                 val gson = Gson()
                 Log.i("chgwebodata", "str:" + str);
                 val serverResponse = gson.fromJson(str, ServerResponse::class.java)
@@ -193,9 +196,7 @@ class FoundActivity : AppCompatActivity() {
                         recycleViewData.add(recommendedFriendModel)
                     }
                 }
-                runOnUiThread {
-                    refresh()
-                }
+                refresh()
             }
         }).start()
     }
