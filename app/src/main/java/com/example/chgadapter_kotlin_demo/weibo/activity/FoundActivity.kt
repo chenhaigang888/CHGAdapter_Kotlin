@@ -23,16 +23,11 @@ import com.example.chgadapter_kotlin_demo.weibo.VH.FuncItemViewHolder
 import com.example.chgadapter_kotlin_demo.weibo.VH.SourceViewHolder
 import com.example.chgadapter_kotlin_demo.weibo.model.*
 import com.google.gson.*
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.internal.readFieldOrNull
-import java.io.IOException
 import java.io.InputStreamReader
-import java.io.Reader
 import java.io.Serializable
 import java.util.*
 
-class FoundActivity : AppCompatActivity() {
+class FoundActivity : AppCompatActivity(),EventTransmissionListener,SlideMomentumListener,Adapter.OnItemClickListener,Adapter.OnItemLongClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
@@ -42,7 +37,6 @@ class FoundActivity : AppCompatActivity() {
     private var pageIndex = 0
     private var isPullRefresh: Boolean? = null
     private var isLoading : Boolean? = null//是否正在加载
-
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,74 +59,24 @@ class FoundActivity : AppCompatActivity() {
         val manager = LinearLayoutManager(getContext())
         manager.orientation = LinearLayoutManager.VERTICAL
         recyclerView.layoutManager = manager
-        recyclerView.eventTransmissionListener = (object : EventTransmissionListener {
-            override fun onEventTransmissionListener(
-                target: Any?,
-                params: Any?,
-                eventId: Int,
-                callBack: CallBack?
-            ): Any? {
-                Log.i("chgLog","点击")
-                if (target is FuncItemViewHolder) {
-                    val intent = Intent(getContext(), SearchActivity::class.java)
-                    startActivity(intent)
-                } else if (target is SourceViewHolder) {
-                    val intent = Intent(getContext(), ShowBigImageViewActivity::class.java)
-                    intent.putExtra("sources", params as Serializable?)
-                    startActivity(intent)
-                }
-                return null
-            }
-        })
-
-        recyclerView.slideMomentumListener = (object : SlideMomentumListener {
-            override fun onRemainingAmount(): Int {
-                return 30
-            }
-
-            override fun onArriveRemainingAmount() {
-                //加载更多数据
-                isPullRefresh = false
-                if (!isLoading!!) {
-                    postAsynHttp()
-                }
-            }
-        })
-        recyclerView.setOnItemClickListener(object : Adapter.OnItemClickListener {
-            override fun onItemClick(
-                parent: RecyclerView?,
-                view: View?,
-                position: Int?,
-                model: Model?
-            ) {
-                Toast.makeText(getContext(), "我好像被点击了", Toast.LENGTH_LONG).show()
-            }
-        })
-        recyclerView.setOnItemLongClickListener(object : Adapter.OnItemLongClickListener {
-            override fun onItemLongClick(
-                parent: RecyclerView?,
-                view: View?,
-                position: Int?,
-                model: Model?
-            ): Boolean {
-                Toast.makeText(getContext(), "我好像被长按了", Toast.LENGTH_LONG).show()
-                return true
-            }
-        })
+        recyclerView.eventTransmissionListener = this
+        recyclerView.slideMomentumListener = this
+        recyclerView.setOnItemClickListener(this)
+        recyclerView.setOnItemLongClickListener(this)
     }
 
     fun configRefreshLayout() {
         //下拉刷新的圆圈是否显示
-        swipeRefreshLayout!!.isRefreshing = false
+        swipeRefreshLayout.isRefreshing = false
         //设置下拉时圆圈的颜色（可以由多种颜色拼成）
-        swipeRefreshLayout!!.setColorSchemeResources(
+        swipeRefreshLayout.setColorSchemeResources(
             android.R.color.holo_blue_light,
             android.R.color.holo_red_light,
             android.R.color.holo_orange_light
         )
         //设置下拉时圆圈的背景颜色（这里设置成白色）
-        swipeRefreshLayout!!.setProgressBackgroundColorSchemeResource(android.R.color.white)
-        swipeRefreshLayout!!.setOnRefreshListener {
+        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(android.R.color.white)
+        swipeRefreshLayout.setOnRefreshListener {
             isPullRefresh = true
             postAsynHttp()
         }
@@ -260,5 +204,48 @@ class FoundActivity : AppCompatActivity() {
         return functionArea
     }
 
+    override fun onEventTransmissionListener(
+        target: Any?,
+        params: Any?,
+        eventId: Int,
+        callBack: CallBack?
+    ): Any? {
+        Log.i("chgLog","点击")
+        if (target is FuncItemViewHolder) {
+            val intent = Intent(getContext(), SearchActivity::class.java)
+            startActivity(intent)
+        } else if (target is SourceViewHolder) {
+            val intent = Intent(getContext(), ShowBigImageViewActivity::class.java)
+            intent.putExtra("sources", params as Serializable?)
+            startActivity(intent)
+        }
+        return null
+    }
+
+    override fun onRemainingAmount(): Int {
+        return 30
+    }
+
+    override fun onArriveRemainingAmount() {
+        //加载更多数据
+        isPullRefresh = false
+        if (!isLoading!!) {
+            postAsynHttp()
+        }
+    }
+
+    override fun onItemClick(parent: RecyclerView?, view: View?, position: Int?, model: Model?) {
+        Toast.makeText(getContext(), "我好像被点击了", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onItemLongClick(
+        parent: RecyclerView?,
+        view: View?,
+        position: Int?,
+        model: Model?
+    ): Boolean {
+        Toast.makeText(getContext(), "我好像被长按了", Toast.LENGTH_LONG).show()
+        return true
+    }
 
 }

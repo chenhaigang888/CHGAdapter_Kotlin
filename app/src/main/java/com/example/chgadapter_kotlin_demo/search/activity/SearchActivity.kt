@@ -18,7 +18,6 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mEditText:EditText
-
     private var mHistorySearchData = mutableListOf<TagModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +64,6 @@ class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListe
 
     fun createAdvices(text:String):List<Model>{
         var list = mutableListOf<Model>()
-
         for (i in 0..30) {
             if (text.length % 5 == 0) {//模拟建议搜索的时候检测到用户
                 list.add(UserModel("用户： $text  $i"))
