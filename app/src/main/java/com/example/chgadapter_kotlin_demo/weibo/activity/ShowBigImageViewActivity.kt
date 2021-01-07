@@ -21,16 +21,12 @@ class ShowBigImageViewActivity : AppCompatActivity(),EventTransmissionListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.show_big_image_view)
         recyclerView = findViewById(R.id.recyclerView)
-        val manager = LinearLayoutManager(getContext())
-        manager.orientation = LinearLayoutManager.HORIZONTAL
-        recyclerView.setLayoutManager(manager)
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(recyclerView)
         val map:MutableMap<Any,Any> = intent.extras!!["sources"] as MutableMap<Any, Any>
         recyclerView.models = map["sources"] as List<Model>?
         recyclerView.scrollToPosition((map!!["position"] as Int?)!!)
         recyclerView.eventTransmissionListener = this
-
     }
 
     override fun onEventTransmissionListener(target: Any?, params: Any?, eventId: Int, callBack: CallBack?): Any? {
