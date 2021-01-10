@@ -27,6 +27,7 @@ class ShowBigImageViewActivity : AppCompatActivity(),EventTransmissionListener {
         recyclerView.models = map["sources"] as List<Model>?
         recyclerView.scrollToPosition((map!!["position"] as Int?)!!)
         recyclerView.eventTransmissionListener = this
+
     }
 
     override fun onEventTransmissionListener(target: Any?, params: Any?, eventId: Int, callBack: CallBack?): Any? {
