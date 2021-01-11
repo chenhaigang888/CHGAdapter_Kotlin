@@ -1,4 +1,4 @@
-package com.chg.adapter
+package com.chg.adapter.base
 
 /**
  * 所有model需要实现这个接口

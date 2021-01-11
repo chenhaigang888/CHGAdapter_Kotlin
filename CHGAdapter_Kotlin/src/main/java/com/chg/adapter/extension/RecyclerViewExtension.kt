@@ -1,9 +1,9 @@
 package com.chg.adapter.extension
 
 import androidx.recyclerview.widget.RecyclerView
-import com.chg.adapter.Adapter
-import com.chg.adapter.EventTransmissionListener
-import com.chg.adapter.Model
+import com.chg.adapter.recyclerView.Adapter
+import com.chg.adapter.base.EventTransmissionListener
+import com.chg.adapter.base.Model
 
 
 var RecyclerView.eventTransmissionListener: EventTransmissionListener?

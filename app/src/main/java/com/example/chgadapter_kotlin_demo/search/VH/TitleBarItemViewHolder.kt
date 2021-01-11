@@ -5,12 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import com.chg.adapter.EventTransmissionListener
-import com.chg.adapter.ViewHolder
+import com.chg.adapter.base.EventTransmissionListener
+import com.chg.adapter.recyclerView.ViewHolder
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.search.model.TitleBarItemModel
 import com.example.chgadapter_kotlin_demo.search.model.TitleBarModel
-import kotlinx.android.synthetic.main.search_suggestions_item.view.*
 
 class TitleBarItemViewHolder(
     itemView: View,

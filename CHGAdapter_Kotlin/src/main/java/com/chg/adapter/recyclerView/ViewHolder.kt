@@ -1,17 +1,18 @@
-package com.chg.adapter
+package com.chg.adapter.recyclerView
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
+import com.chg.adapter.base.EventTransmissionListener
+import com.chg.adapter.base.Model
 
 /**
  * 封装的ViewHolder类
  */
-abstract class ViewHolder<M : Model> constructor(itemView: View, eventTransmissionListener: EventTransmissionListener?, parent: ViewGroup?) : RecyclerView.ViewHolder(itemView),ViewHolderLifeCycle<M> ,Notify{
+abstract class ViewHolder<M : Model> constructor(itemView: View, eventTransmissionListener: EventTransmissionListener?, parent: ViewGroup?) : RecyclerView.ViewHolder(itemView),
+    ViewHolderLifeCycle<M>, Notify {
 
     private var eventTransmissionListener: EventTransmissionListener? = null
     private var parent: ViewGroup? = null

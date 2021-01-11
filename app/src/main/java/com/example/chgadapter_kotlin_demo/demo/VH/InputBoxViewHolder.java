@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.chg.adapter.EventTransmissionListener;
-import com.chg.adapter.ViewHolder;
+import com.chg.adapter.base.EventTransmissionListener;
+import com.chg.adapter.recyclerView.ViewHolder;
 import com.example.chgadapter_kotlin_demo.demo.Other.LoginData;
 import com.example.chgadapter_kotlin_demo.R;
 import com.example.chgadapter_kotlin_demo.demo.model.InputBoxModel;

@@ -7,14 +7,18 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.chg.adapter.*
+import com.chg.adapter.base.EventTransmissionListener
+import com.chg.adapter.base.Model
 import com.chg.adapter.extension.*
+import com.chg.adapter.recyclerView.Adapter
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.search.VH.SearchResultViewHolder
 import com.example.chgadapter_kotlin_demo.search.VH.SearchSuggestionsViewHolder
 import com.example.chgadapter_kotlin_demo.search.model.*
 
-class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListener,EventTransmissionListener,Adapter.OnItemClickListener{
+class SearchActivity : AppCompatActivity() ,View.OnKeyListener,View.OnClickListener,
+    EventTransmissionListener,
+    Adapter.OnItemClickListener{
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mEditText:EditText

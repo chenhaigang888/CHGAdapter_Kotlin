@@ -1,10 +1,10 @@
 package com.example.chgadapter_kotlin_demo.search.model
 
-import com.chg.adapter.Model
+import com.chg.adapter.base.Model
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.search.VH.TitleBarViewHolder
 
-class TitleBarModel:Model {
+class TitleBarModel: Model {
 
     var currentPosition:Int = 0
     var barItems:List<TitleBarItemModel>

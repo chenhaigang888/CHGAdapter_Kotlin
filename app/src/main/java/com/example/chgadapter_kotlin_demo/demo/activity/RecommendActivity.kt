@@ -3,7 +3,7 @@ package com.example.chgadapter_kotlin_demo.demo.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.chg.adapter.Model
+import com.chg.adapter.base.Model
 import com.chg.adapter.extension.models
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.demo.model.AlbumModel

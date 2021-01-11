@@ -1,4 +1,4 @@
-package com.chg.adapter
+package com.chg.adapter.recyclerView
 
 /**
  * 抽离ViewHolder刷新

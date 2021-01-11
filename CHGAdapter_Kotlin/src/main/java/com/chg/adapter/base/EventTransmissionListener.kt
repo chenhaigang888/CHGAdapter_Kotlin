@@ -1,4 +1,4 @@
-package com.chg.adapter
+package com.chg.adapter.base
 
 /**
  * 事件传输

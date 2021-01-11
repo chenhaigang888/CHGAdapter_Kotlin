@@ -1,6 +1,6 @@
 package com.example.chgadapter_kotlin_demo.weibo.model;
 
-import com.chg.adapter.Model;
+import com.chg.adapter.base.Model;
 import com.example.chgadapter_kotlin_demo.R;
 import com.example.chgadapter_kotlin_demo.weibo.VH.FoundUserViewHolder;
 

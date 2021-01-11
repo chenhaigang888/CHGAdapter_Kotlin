@@ -2,19 +2,16 @@ package com.example.chgadapter_kotlin_demo.weibo.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.chg.adapter.EventTransmissionListener
-import com.chg.adapter.EventTransmissionListener.CallBack
-import com.chg.adapter.Model
+import com.chg.adapter.base.EventTransmissionListener
+import com.chg.adapter.base.EventTransmissionListener.CallBack
+import com.chg.adapter.base.Model
 import com.chg.adapter.extension.eventTransmissionListener
-import com.chg.adapter.extension.getContext
 import com.chg.adapter.extension.models
 import com.example.chgadapter_kotlin_demo.R
-import java.util.*
 
-class ShowBigImageViewActivity : AppCompatActivity(),EventTransmissionListener {
+class ShowBigImageViewActivity : AppCompatActivity(), EventTransmissionListener {
 
     private lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {

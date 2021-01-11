@@ -1,8 +1,8 @@
 package com.example.chgadapter_kotlin_demo.weibo.model;
 
 
-import com.chg.adapter.Model;
-import com.chg.adapter.ViewHolder;
+import com.chg.adapter.base.Model;
+import com.chg.adapter.recyclerView.ViewHolder;
 
 class Circle implements Model {
     @Override

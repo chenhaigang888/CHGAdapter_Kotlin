@@ -1,11 +1,11 @@
-package com.chg.adapter
+package com.chg.adapter.recyclerView
 
-import androidx.recyclerview.widget.RecyclerView
+import com.chg.adapter.base.Model
 
 /**
  * ViewHolder生命周期
  */
- interface ViewHolderLifeCycle<M:Model> {
+ interface ViewHolderLifeCycle<M: Model> {
 
     /**
      * 绑定数据

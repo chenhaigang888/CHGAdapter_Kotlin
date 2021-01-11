@@ -1,12 +1,13 @@
-package com.chg.adapter
+package com.chg.adapter.recyclerView
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.chg.adapter.base.EventTransmissionListener
+import com.chg.adapter.base.Model
 import java.lang.reflect.Constructor
 
 open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>(), View.OnClickListener,View.OnLongClickListener {
@@ -19,7 +20,7 @@ open class Adapter<M : Model>() : Adapter<RecyclerView.ViewHolder>(), View.OnCli
     private var slideMomentumListener: SlideMomentumListener? = null
 
     private var onItemClickListener : OnItemClickListener? = null
-    private var onItemLongClickListener :OnItemLongClickListener? = null
+    private var onItemLongClickListener : OnItemLongClickListener? = null
 
     private var recyclerView : RecyclerView? = null
 

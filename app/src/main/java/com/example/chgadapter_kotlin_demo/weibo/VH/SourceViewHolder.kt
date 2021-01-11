@@ -12,9 +12,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
-import com.chg.adapter.EventTransmissionListener
-import com.chg.adapter.Model
-import com.chg.adapter.ViewHolder
+import com.chg.adapter.base.EventTransmissionListener
+import com.chg.adapter.base.Model
+import com.chg.adapter.recyclerView.ViewHolder
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.weibo.model.FoundSendData
 import com.example.chgadapter_kotlin_demo.weibo.model.Source

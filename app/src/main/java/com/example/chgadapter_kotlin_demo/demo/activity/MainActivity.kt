@@ -7,21 +7,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.chg.adapter.*
+import com.chg.adapter.base.EventTransmissionListener
+import com.chg.adapter.base.Model
 import com.chg.adapter.extension.eventTransmissionListener
 import com.chg.adapter.extension.models
 import com.chg.adapter.extension.setOnItemClickListener
 import com.chg.adapter.extension.setOnItemLongClickListener
+import com.chg.adapter.recyclerView.Adapter
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.demo.VH.SongViewHolder
 import com.example.chgadapter_kotlin_demo.demo.model.MenuItemModel
 import com.example.chgadapter_kotlin_demo.search.activity.SearchActivity
-import com.example.chgadapter_kotlin_demo.search.model.GroupModel
-import com.example.chgadapter_kotlin_demo.search.model.PostModel
-import com.example.chgadapter_kotlin_demo.search.model.SearchSuggestionsModel
-import com.example.chgadapter_kotlin_demo.search.model.TagModel
 import com.example.chgadapter_kotlin_demo.weibo.activity.FoundActivity
 
-open class MainActivity : AppCompatActivity(),EventTransmissionListener,Adapter.OnItemClickListener,Adapter.OnItemLongClickListener{
+open class MainActivity : AppCompatActivity(), EventTransmissionListener, Adapter.OnItemClickListener,
+    Adapter.OnItemLongClickListener{
 
     private lateinit var recyclerView: RecyclerView
 

@@ -1,19 +1,16 @@
 package com.example.chgadapter_kotlin_demo.weibo.VH
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.chg.adapter.EventTransmissionListener
-import com.chg.adapter.Model
-import com.chg.adapter.ViewHolder
+import com.chg.adapter.base.EventTransmissionListener
+import com.chg.adapter.base.Model
+import com.chg.adapter.recyclerView.ViewHolder
 import com.chg.adapter.extension.eventTransmissionListener
 import com.chg.adapter.extension.models
 import com.chg.adapter.extension.notifyDataSetChanged
-import com.chg.adapter.extension.notifyItemChanged
 import com.example.chgadapter_kotlin_demo.R
-import com.example.chgadapter_kotlin_demo.weibo.model.FuncItem
 import com.example.chgadapter_kotlin_demo.weibo.model.FunctionArea
 import com.example.chgadapter_kotlin_demo.weibo.model.RecommendedFriendModel
 

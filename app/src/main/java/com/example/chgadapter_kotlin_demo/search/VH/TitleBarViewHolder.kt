@@ -6,8 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
-import com.chg.adapter.*
+import com.chg.adapter.base.EventTransmissionListener
+import com.chg.adapter.base.Model
 import com.chg.adapter.extension.*
+import com.chg.adapter.recyclerView.Adapter
+import com.chg.adapter.recyclerView.ViewHolder
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.search.model.TitleBarModel
 

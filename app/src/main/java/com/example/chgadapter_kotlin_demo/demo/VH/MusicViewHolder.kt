@@ -4,9 +4,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.chg.adapter.*
+import com.chg.adapter.base.EventTransmissionListener
 import com.chg.adapter.extension.models
 import com.chg.adapter.extension.notifyDataSetChanged
+import com.chg.adapter.recyclerView.ViewHolder
 import com.example.chgadapter_kotlin_demo.R
 import com.example.chgadapter_kotlin_demo.demo.model.MusicModel
 
